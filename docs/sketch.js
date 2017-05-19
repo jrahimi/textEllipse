@@ -107,7 +107,7 @@ function move2(i) {
   if (xpos2[i] > width - r2 || xpos2[i] < 0) {
     xdirection2[i] *= -1;
   }
-  if (ypos2[i] > height - r2 || ypos[i] < 0) {
+  if (ypos2[i] > height - r2 || ypos2[i] < 0) {
     ydirection2[i] *= -1;
   }
 }
