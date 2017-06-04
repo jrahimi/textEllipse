@@ -34,6 +34,7 @@ var len, r, len2, r2; //Calculates the radius of the text ellipse
 
 var value = 0;
 
+var words = ["i", "heart", "p", "five"]; // some words
 var myVoice = new p5.Speech(); // new P5.Speech object
 var iptr = 0; // a counter for the words
 
@@ -189,11 +190,6 @@ function display2(i) {
     arclength += w/2;
   } 
   
-//   	function doList()
-// 	{
-// 		myVoice.listVoices(); // debug printer for voice options
-// 	}
-  
   	function mousePressed()
 	{
 		// if in bounds:
@@ -201,8 +197,8 @@ function display2(i) {
 	if(mouseX<width && mouseY<height) {
 			// randomize voice and speak word:
 			myVoice.setVoice(Math.floor(random(myVoice.voices.length)));
-			myVoice.speak(message[iptr]);
-			iptr = (iptr+1) % message.length; // increment
+			myVoice.speak(words[iptr]);
+			iptr = (iptr+1) % words.length; // increment
 		}
 	}
 
