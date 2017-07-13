@@ -20,13 +20,20 @@ var message2 = ["What kind of dog do you have?",
 "Really close friend of mine in IV. I actually have his name tattooed on me haha.", 
 "Holy shit I totally remember that!"];
 
+//Speech
 var theVoice = new p5.Speech('Google UK English Male'); // new P5.Speech object
-theVoice.onStart = startSpeaking;
-theVoice.onEnd = endSpeaking;
+theVoice.onStart = startSpeaking; //Speech start
+theVoice.onEnd = endSpeaking; //Speech end
 var speaking = false;
 
 var conversation1;
 var conversation2;
+
+//Hammer.js
+var hammertime = new Hammer(conversation1);
+hammertime.on('tap', function(ev) {
+	console.log(ev);
+});
 
 function setup() {
   createCanvas(800, 800);
@@ -52,16 +59,20 @@ function draw() {
   conversation2.draw();
 }
 
+function tabletFunctions(){
+  
+}
+
 function mousePressed(){
   if(!speaking){ //only speak if we are not already speaking
     //choose which conversation we want to start with
     var randomNumber = random();
-    console.log("The random number is: "+randomNumber);
+    //console.log("The random number is: "+randomNumber);
     if(randomNumber > 0.5){
-      console.log("Conversation 1 is about to say something");
+      //console.log("Conversation 1 is about to say something");
       saySomething(conversation1);
     }else{
-      console.log("Conversation 2 is about to say something");
+      //console.log("Conversation 2 is about to say something");
       saySomething(conversation2);
     }
   }
@@ -73,17 +84,17 @@ function saySomething(aConversation){
 
       // randomize voice and speak word:
   //theVoice.setVoice(Math.floor(random(theVoice.voices.length)));
-  console.log("I'm going to say "+thingToSay);
+  //console.log("I'm going to say "+thingToSay);
   theVoice.speak(thingToSay);
 }
 
 function startSpeaking(){
-  console.log("I'm starting to speak");
+  //console.log("I'm starting to speak");
   speaking = true;
 }
 
 function endSpeaking(){
-  console.log("I've finished speaking");
+  //console.log("I've finished speaking");
   speaking = false;
 }
 
