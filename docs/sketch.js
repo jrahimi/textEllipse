@@ -31,28 +31,6 @@ var speaking = false;
 var conversation1;
 var conversation2;
 
-//Hammer.js
-//http://alpha.editor.p5js.org/projects/rkOj4bueg
-// var options = {
-//     preventDefault: true
-//   };
-
-// var hammer = new Hammer(document.body, options);
-// hammer.get('tap').set ({
-// 	//console.log(ev);
-// 	direction: Hammer.DIRECTION_ALL
-// });
-// hammer.on("swipe", swiped);
-//
-//From examples on github 
-// var hammertime = new Hammer(conversation1);
-// hammertime.on('tap', function(ev) {
-// 	console.log(ev);
-// });
-//
-//http://alpha.editor.p5js.org/yining/sketches/H1qyGcYex
-//var currentIndex;
-
 function setup() {
   createCanvas(800, 800);
 
@@ -65,22 +43,6 @@ function setup() {
 
   conversation1 = new Conversation(message, conversation1Colour);
   conversation2 = new Conversation(message2, conversation2Colour);
-  
-
-  // //Hammer.js
-  // ////http://alpha.editor.p5js.org/yining/sketches/H1qyGcYex
-  // var options = {
-  //   preventDefault: true
-  // };
-
-  // var hammer = new Hammer(document.body, options);
-  // hammer.get('swipe').set({
-  //   //console.log(ev);
-  //   direction: Hammer.DIRECTION_ALL
-  // });
-  // hammer.on("swipe", swiped);
-
-  // currentIndex = Math.floor(random(message.length - 1));
 }
 
 function draw() {
@@ -94,40 +56,7 @@ function draw() {
 }
 
 function tabletFunctions() {
-  //http://alpha.editor.p5js.org/yining/sketches/H1qyGcYex
-  //set options to prevent default behaviors for swipe, pinch, etc
-  var options = {
-    preventDefault: true
-  };
-  
-  //document.body registers gestures anywhere on the page
-  var hammer = new Hammer(document.body, options);
-  hammer.get('swipe').set({
-    //console.log(ev);
-    direction: Hammer.DIRECTION_ALL
-  });
-  hammer.on("swipe", swiped);
 
-  //get a random index
-  var randomIndexToThingToSwipe = Math.floor(random(messages.length));
-  var thingToSwipe = messages[randomIndexToThingToSwipe];
-  
-  this.swiped = function(event) { //http://alpha.editor.p5js.org/yining/sketches/H1qyGcYex
-    if (event.direction == 4) {
-      console.log("you swiped right");
-      thingToSwipe ++;
-    } else if (event.direction == 2) {
-      console.log("you swiped left");
-      thingToSwipe --;
-    }
-    if (thingToSwipe  >= this.messages.length) {
-      thingToSwipe  = 0;
-    }
-    if (thingToSwipe  < 0) {
-      thingToSwipe  = this.messages.length - 1;
-    }
-    console.log(thingToSwipe);
-  }
 }
 
 function mousePressed() {
