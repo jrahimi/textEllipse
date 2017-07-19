@@ -1,9 +1,140 @@
-//Example of Hammer.js swipe: http://alpha.editor.p5js.org/yining/sketches/HyoEADcgx (but this one uses document.body which means swiping is enabled anywhere on the screen)  
-//Example of Hammer.js swipe: http://jsfiddle.net/6jxbv/119/ (only moves box)
+/*
+Hammer.js: http://hammerjs.github.io
 
-//Hammer.js Refrence Page: http://hammerjs.github.io/api/ 
+GitHub:
+hammer.js/Hammer.js: https://github.com/hammerjs/hammer.js/tree/master/tests/manual
+hammerjs/jquery.hammer.js: https://github.com/hammerjs/jquery.hammer.js
+thebird/Swipe: https://github.com/thebird/Swipe
+colinbdclark/osc.js: https://github.com/colinbdclark/osc.js/
+genekogan/p5js-osc: https://github.com/genekogan/p5js-osc
 
-//Instance Container (document.body) - https://p5js.org/examples/instance-mode-instance-container.html
+Examples: 
+  Has a bunnch of Examples: http://codeforartists.com
+  
+  Hammer.js Examples: 
+    Example of Hammer.js swipe: http://alpha.editor.p5js.org/yining/sketches/HyoEADcgx (but this one uses document.body which means swiping is enabled anywhere on the screen)  
+    Example of Hammer.js swipe: http://jsfiddle.net/6jxbv/119/ (only moves box)
+    Example of Hammer.js gestures: https://codepen.io/runspired/full/ZQBGWd
+    Example of Hammer.js swipe velocity: http://alpha.editor.p5js.org/projects/rkOj4bueg
+    Example of Hammer.js swipe image: http://alpha.editor.p5js.org/yining/sketches/H1qyGcYex
+    Example of Hammer.js gesture detection: http://alpha.editor.p5js.org/projects/HyEDRsPel,
+      https://codepen.io/jtangelder/pen/lgELw
+    Example of Hammer.js swipe single box: http://jsfiddle.net/6jxbv/119/
+    Example of Hammer.js swipe one in a line: http://www.webdevbreak.com/episodes/touch-gestures-hammerjs/demo,
+      http://www.webdevbreak.com/episodes/touch-gestures-hammerjs,
+      http://www.webdevbreak.com/episodes/touch-gestures-hammerjs-2
+    Example of Hammer.js swipe and drag: http://jsfiddle.net/gilbertolenzi/uZjCB/208/
+  
+  p5.js Examples: 
+    Example of p5.js ("Soft Body") node: https://p5js.org/examples/simulate-soft-body.html
+    Example of writing text on canvas: http://jsfiddle.net/amaan/WxmQR/1/
+    Example of createImage(): https://p5js.org/examples/image-create-image.html
+    Example of createGraphics(): https://p5js.org/examples/structure-create-graphics.html
+    Example of drawTarget(): https://p5js.org/examples/structure-functions.html
+    Example of p5.js Objects: https://p5js.org/examples/objects-objects.html
+    Example of p5.js Interactivity: https://p5js.org/examples/hello-p5-interactivity-1.html
+    p5.js List of Examples: https://p5js.org/examples/
+
+Reference Pages: 
+  Processing Strings and Drawing Text: https://processing.org/tutorials/text/
+  Daniel Shiffman "Programming from A to Z": http://shiffman.net/a2z/intro/
+  OSC Simple Guide: https://www.jroehm.com/2015/10/a-simple-guide-to-use-osc-in-the-browser/
+  
+  p5.js Reference Pages: 
+    p5.js Refrence Page: https://p5js.org/reference/
+    p5.js Overview: https://github.com/processing/p5.js/wiki/p5.js-overview
+    Beyond the Canvas (pointers, createCanvas, createElement, etc.): https://github.com/processing/p5.js/wiki/Beyond-the-canvas
+    Convert Text to Images with JavaScript: https://www.shift8web.ca/blog/convert-text-image-javascript-html5/,
+      https://ctrlq.org/code/20056-convert-text-to-images-with-javascript
+  
+  Hammer.js Refrence Pages: http://hammerjs.github.io/api/, 
+    https://github.com/hammerjs/hammer.js/issues/241, 
+    http://hammerjs.github.io/tips/,
+    https://github.com/hammerjs/hammer.js/wiki/Getting-Started,
+    https://github.com/hammerjs/hammer.js/tree/master/
+    https://github.com/hammerjs/hammer.js/wiki/Tips-&-Tricks#horizontal-swipe-and-drag
+  
+  DOM Refrence Pages:
+    Intro to DOM manipulation and events: https://github.com/processing/p5.js/wiki/Intro-to-DOM-manipulation-and-events
+    p5.dom: https://p5js.org/reference/#/libraries/p5.dom
+
+
+Specific Reference Pages: 
+  JSON Specific Refrence Pages: 
+    JSON: https://www.w3schools.com/js/js_json_html.asp
+    
+  DOM Specific Refrence Pages: 
+    DOM Style Left: https://www.w3schools.com/jsref/prop_style_left.asp
+  
+  Node Specific Refrence Pages: 
+    Node.js: https://www.w3schools.com/nodejs/nodejs_intro.asp
+  
+  CSS Specific Refrence Pages: 
+    CSS Text: https://www.w3schools.com/css/css_text.asp
+    Pointer Events: https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events
+    user-select: https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
+    
+  HTML Specific Refrence Pages: 
+    HTML5 Canvas: https://www.w3schools.com/html/html5_canvas.asp
+    HTML <ul>: https://www.w3schools.com/tags/tag_ul.asp
+    HTMLElements: https://www.w3schools.com/html/html_elements.asp,
+      https://developer.mozilla.org/en/docs/Web/API/HTMLElement
+    HTML <div> Tag: https://www.w3schools.com/tags/tag_div.asp
+    HTML Event Attributes: https://www.w3schools.com/tags/ref_eventattributes.asp
+    HTML Global Attributes: https://www.w3schools.com/tags/ref_standardattributes.asp
+    HTML Class Attribute: https://www.w3schools.com/html/html_classes.asp
+    HTML id Attribute: https://www.w3schools.com/tags/att_global_id.asp
+    HTML DOM Style Object: https://www.w3schools.com/jsref/dom_obj_style.asp
+    Style clip Property: https://www.w3schools.com/jsref/prop_style_clip.asp
+    Style animationFillMode Property: https://www.w3schools.com/jsref/prop_style_animationfillmode.asp
+    Style animation Property: https://www.w3schools.com/jsref/prop_style_animation.asp
+    Style position Property: https://www.w3schools.com/jsref/prop_style_position.asp
+    document.getElementById(): https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById
+    document.querySelectorAll(): https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll
+    document.getElementsByClassName(): https://developer.mozilla.org/en/docs/Web/API/Document/getElementsByClassName
+    KeyboardEvent keyCode Property: https://www.w3schools.com/jsref/event_key_keycode.asp
+    
+  p5.js Specific Refrence Pages: 
+    touchStarted(): https://p5js.org/reference/#/p5/touchStarted
+    select(): https://p5js.org/reference/#/p5/select
+    push(): https://p5js.org/reference/#/p5/push
+    p5.Element: https://p5js.org/reference/#/p5.Element
+    selectAll(): https://p5js.org/reference/#/p5/selectAll
+    Instance Container (document.body): https://p5js.org/examples/instance-mode-instance-container.html
+    createGraphics(): https://p5js.org/reference/#/p5/createGraphics
+    createDiv(): https://p5js.org/reference/#/p5/createDiv
+    createImage(): https://www.w3schools.com/jsref/prop_style_position.asp
+    Positioning your canvas: https://github.com/processing/p5.js/wiki/Positioning-your-canvas
+    .offSet(): http://api.jquery.com/offset/
+    JavaScript HTML DOM Elements: https://www.w3schools.com/js/js_htmldom_elements.asp
+    event.target: https://api.jquery.com/event.target/
+    
+  Hammer.js Specific Refrence Pages: 
+    Hammer Positions: https://github.com/hammerjs/hammer.js/issues/577
+    Hammer.Manager: https://hammerjs.github.io/jsdoc/Manager.html
+    Hammer.Swipe(options): http://hammerjs.github.io/recognizer-swipe/
+    Touch-Action: https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action, 
+      http://hammerjs.github.io/touch-action/
+    
+Forums: 
+  Hammer.js Forums: 
+    How to use Hammer to swipe: https://stackoverflow.com/questions/16873981/how-to-use-hammer-to-swipe
+    Hammer.js get DOM object where event was attached: https://stackoverflow.com/questions/29984702/hammer-js-get-dom-object-where-event-was-attached
+    How to return X and Y coordinates when using jquery.hammer.js: https://stackoverflow.com/questions/17391478/how-to-return-x-and-y-coordinates-when-using-jquery-hammer-js
+    e.center.x & y same as element .left/.top in Hammer.js 2.0?: https://stackoverflow.com/questions/17391478/how-to-return-x-and-y-coordinates-when-using-jquery-hammer-js
+    Is there a deltaX/deltaY of last event fire?: https://github.com/hammerjs/hammer.js/issues/414
+
+  HTML/CSS Forums: 
+    Calling CSS in JavaScript: https://www.sitepoint.com/community/t/calling-css-in-javascript/7199
+    How to create a <style> tag with JavaScript: https://stackoverflow.com/questions/524696/how-to-create-a-style-tag-with-javascript
+    Is there anyway that I can give a div a function in p5.js: https://github.com/processing/p5.js/wiki/Positioning-your-canvas
+    
+  p5.js Forums: 
+    What's the best way to generate image from text using JavaScript and HTML5 APIs?: https://hashnode.com/post/whats-the-best-way-to-generate-image-from-text-using-javascript-and-html5-apis-cik6k8rbj01izxy53619llzzp
+    How can I generate an image based on text and CSS?: https://stackoverflow.com/questions/17618574/how-can-i-generate-an-image-based-on-text-and-css
+    Equivalent of pTouchX/Y for objects in 'touches[]': https://github.com/processing/p5.js/issues/1478
+    Array of Images p5.js: https://stackoverflow.com/questions/40652443/array-of-images-p5-js
+*/
 
 //Content
 var message = ["Miss *** that smile.",
