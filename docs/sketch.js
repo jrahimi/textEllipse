@@ -1,5 +1,3 @@
-//Check check 
-
 //Conversations
 
 //1 - Never met (Adena & Clayton)
@@ -28,7 +26,7 @@ var rightConversation1 = ["Hehe. Where do you live?",
 ]; //Girl
 
 //2 - Never met (Adena & Garett)
-var leftConversation2 = ["What are you from?",
+var leftConversation2 = ["Where are you from?",
   "I can't wait. I'm from LA too! Where in LA do you live?",
   "I was in Agoura earlier today! But I live in Encino. Hopefully moving soon though.",
   "Haha yup the valley live. Do you live with your parents?",
@@ -232,41 +230,17 @@ var currentConversation = 0;
 
 //Speech
 var speaking = false;
-//Left Conversation Speech
-var leftVoice = new p5.Speech('Google UK English Male'); // new P5.Speech object
-leftVoice.onStart = startSpeakingLeft; //Speech start
-leftVoice.onEnd = endSpeakingLeft; //Speech end
 var leftSpeaking = false;
 
-//Right Conversation Speech
-var rightVoice = new p5.Speech('Google UK English Female'); // new P5.Speech object
-rightVoice.onStart = startSpeakingRight; //Speech start
-rightVoice.onEnd = endSpeakingRight; //Speech end
-var rightSpeaking = false;
+//Male Conversation Speech
+var maleVoice = new p5.Speech('Google UK English Male'); // new P5.Speech object
+maleVoice.onStart = true; //Speech start
+maleVoice.onEnd = false; //Speech end
 
-function saySomethingLeft(aThingToSay) {
-  leftVoice.speak(aThingToSay);
-}
-
-function saySomethingRight(aThingToSay) {
-  rightVoice.speak(aThingToSay);
-}
-
-function startSpeakingLeft() {
-  leftSpeaking = true;
-}
-
-function endSpeakingLeft() {
-  leftSpeaking = false;
-}
-
-function startSpeakingRight() {
-  rightSpeaking = true;
-}
-
-function endSpeakingRight() {
-  rightSpeaking = false;
-}
+//Female Conversation Speech
+var femaleVoice = new p5.Speech('Google UK English Female'); // new P5.Speech object
+femaleVoice.onStart = true; //Speech start
+femaleVoice.onEnd = false; //Speech end
 
 function setup() {
   createCanvas(800, 800); //This will need to be fullScreen
@@ -278,19 +252,19 @@ function setup() {
   smooth();
 
   //Conversation Text Colors
-  var boyColour = color(103, 170, 255); //Blue color(165, 201, 247); 
-  var girlColour = color(255, 144, 211); //Pink color(247, 165, 213);
+  var maleColour = color(103, 170, 255); //Blue color(165, 201, 247); 
+  var femaleColour = color(255, 144, 211); //Pink color(247, 165, 213);
 
   //Create a new Conversation and send it conversations and conversation colors
-  append(conversations, new Conversation("They broke up", leftConversation1, rightConversation1, boyColour, girlColour)); //Conversation 1
-  append(conversations, new Conversation("They got married", leftConversation2, rightConversation2, girlColour, boyColour)); //Conversation 2
-  append(conversations, new Conversation("Gauchos", leftConversation3, rightConversation3, boyColour, girlColour)); //Conversation 3
-  append(conversations, new Conversation("They got married", leftConversation4, rightConversation4, boyColour, girlColour)); //Conversation 4
-  append(conversations, new Conversation("They broke up", leftConversation5, rightConversation5, boyColour, girlColour)); //Conversation 5
-  append(conversations, new Conversation("They got married", leftConversation6, rightConversation6, boyColour, girlColour)); //Conversation 6
-  append(conversations, new Conversation("Ravenclaw vs. Gryffendor", leftConversation7, rightConversation7, boyColour, girlColour)); //Conversation 7
-  append(conversations, new Conversation("Neighbors?", leftConversation8, rightConversation8, boyColour, girlColour)); //Conversation 8
-  append(conversations, new Conversation("Well then, a walk on the beach", leftConversation9, rightConversation9, boyColour, girlColour)); //Conversation 9
+  append(conversations, new Conversation("They broke up", leftConversation1, rightConversation1, maleColour, femaleColour, maleVoice, femaleVoice)); //Conversation 1
+  append(conversations, new Conversation("They got married", leftConversation2, rightConversation2, femaleColour, maleColour, femaleVoice, maleVoice)); //Conversation 2
+  append(conversations, new Conversation("Gauchos", leftConversation3, rightConversation3, maleColour, femaleColour, maleVoice, femaleVoice)); //Conversation 3
+  append(conversations, new Conversation("They got married", leftConversation4, rightConversation4, maleColour, femaleColour, maleVoice, femaleVoice)); //Conversation 4
+  append(conversations, new Conversation("They broke up", leftConversation5, rightConversation5, maleColour, femaleColour, maleVoice, femaleVoice)); //Conversation 5
+  append(conversations, new Conversation("They got married", leftConversation6, rightConversation6, maleColour, femaleColour, maleVoice, femaleVoice)); //Conversation 6
+  append(conversations, new Conversation("Ravenclaw vs. Gryffendor", leftConversation7, rightConversation7, maleColour, femaleColour, maleVoice, femaleVoice)); //Conversation 7
+  append(conversations, new Conversation("Neighbors?", leftConversation8, rightConversation8, maleColour, femaleColour, maleVoice, femaleVoice)); //Conversation 8
+  append(conversations, new Conversation("Well then, a walk on the beach", leftConversation9, rightConversation9, maleColour, femaleColour, maleVoice, femaleVoice)); //Conversation 9
 
   //Gestures
   var options = { //Set options to prevent default behaviors for swipe, pinch, etc
@@ -337,12 +311,14 @@ function doubleTap(event) {
   conversations[currentConversation].doubleTapped();
 }
 
-function Conversation(title, leftMessages, rightMessages, leftColour, rightColour) { //https://github.com/processing/p5.js/wiki/JavaScript-basics#using-parameters for how to make classes and constructors
+function Conversation(title, leftMessages, rightMessages, leftColour, rightColour, leftVoice, rightVoice) { //https://github.com/processing/p5.js/wiki/JavaScript-basics#using-parameters for how to make classes and constructors
   this.title = title;
   this.leftMessages = leftMessages;
   this.rightMessages = rightMessages;
   this.leftColour = leftColour;
   this.rightColour = rightColour;
+  this.leftVoice = leftVoice;
+  this.rightVoice = rightVoice;
 
   if (this.leftMessages.length != this.rightMessages.length) {
     //LEFT AND RIGHT MESSAGES MUST BE THE SAME LENGTH, SO ERROR MESSAGE
@@ -364,12 +340,20 @@ function Conversation(title, leftMessages, rightMessages, leftColour, rightColou
     this.rightVelocities[i] = createVector(random(1, 5), random(1, 5)); //https://p5js.org/reference/#/p5/random    
   }
 
+  this.saySomethingLeft = function(aThingToSay) {
+    leftVoice.speak(aThingToSay);
+  }
+
+  this.saySomethingRight = function(aThingToSay) {
+    rightVoice.speak(aThingToSay);
+  }
+
   this.doubleTapped = function() {
     if (!speaking) {
-      saySomethingLeft(this.leftMessages[this.staticMessage]);
+      this.saySomethingLeft(this.leftMessages[this.staticMessage]);
     }
     if (!leftSpeaking) {
-      saySomethingRight(this.rightMessages[this.staticMessage]);
+      this.saySomethingRight(this.rightMessages[this.staticMessage])
     }
   }
 
@@ -423,7 +407,6 @@ function Conversation(title, leftMessages, rightMessages, leftColour, rightColou
       }
     }
   }
-
 
   this.draw = function() {
     fill((red(leftColour) + red(rightColour)) / 2, (green(leftColour) + green(rightColour)) / 2, (blue(leftColour) + blue(rightColour)) / 2)
