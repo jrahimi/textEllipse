@@ -1,303 +1,474 @@
-/*
-Hammer.js: http://hammerjs.github.io
+//Conversations
 
-GitHub:
-hammer.js/Hammer.js: https://github.com/hammerjs/hammer.js/tree/master/tests/manual
-hammerjs/jquery.hammer.js: https://github.com/hammerjs/jquery.hammer.js
-thebird/Swipe: https://github.com/thebird/Swipe
-colinbdclark/osc.js: https://github.com/colinbdclark/osc.js/
-genekogan/p5js-osc: https://github.com/genekogan/p5js-osc
+//1 - Never met (Adena & Clayton)
+var leftConversation1 = ["Miss *** that smile.",
+  "North Hollywood, and you?",
+  "That's not crazy far! Where are you moving to?",
+  "I'm in music, I am in a band with my two brothers, we tour pretty often so I'm not home a lot, but I am here for the next few months which is nice. And you?",
+  "Amazing congrats! Hurry up and move here. It's similar to Maroon 5, but a little more urban if that makes any sense lol",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  "
+]; //Boy
 
-Examples: 
-  Has a bunnch of Examples: http://codeforartists.com
-  
-  Hammer.js Examples: 
-    Example of Hammer.js swipe: http://alpha.editor.p5js.org/yining/sketches/HyoEADcgx (but this one uses document.body which means swiping is enabled anywhere on the screen)  
-    Example of Hammer.js swipe: http://jsfiddle.net/6jxbv/119/ (only moves box)
-    Example of Hammer.js gestures: https://codepen.io/runspired/full/ZQBGWd
-    Example of Hammer.js swipe velocity: http://alpha.editor.p5js.org/projects/rkOj4bueg
-    Example of Hammer.js swipe image: http://alpha.editor.p5js.org/yining/sketches/H1qyGcYex
-    Example of Hammer.js gesture detection: http://alpha.editor.p5js.org/projects/HyEDRsPel,
-      https://codepen.io/jtangelder/pen/lgELw
-    Example of Hammer.js swipe single box: http://jsfiddle.net/6jxbv/119/
-    Example of Hammer.js swipe one in a line: http://www.webdevbreak.com/episodes/touch-gestures-hammerjs/demo,
-      http://www.webdevbreak.com/episodes/touch-gestures-hammerjs,
-      http://www.webdevbreak.com/episodes/touch-gestures-hammerjs-2
-    Example of Hammer.js swipe and drag: http://jsfiddle.net/gilbertolenzi/uZjCB/208/
-  
-  p5.js Examples: 
-    Example of p5.js ("Soft Body") node: https://p5js.org/examples/simulate-soft-body.html
-    Example of writing text on canvas: http://jsfiddle.net/amaan/WxmQR/1/
-    Example of createImage(): https://p5js.org/examples/image-create-image.html
-    Example of createGraphics(): https://p5js.org/examples/structure-create-graphics.html
-    Example of drawTarget(): https://p5js.org/examples/structure-functions.html
-    Example of p5.js Objects: https://p5js.org/examples/objects-objects.html
-    Example of p5.js Interactivity: https://p5js.org/examples/hello-p5-interactivity-1.html
-    p5.js List of Examples: https://p5js.org/examples/
+var rightConversation1 = ["Hehe. Where do you live?",
+  "Encino! But hoping to move soon",
+  "Yea it's not too far! I think I want to move to West Hollywood. Gonna start looking for apartments soon! What do you do?",
+  "That's amazing! What kind of music do you guys play? I start working for Oracle next month. I'm really excited",
+  "   ",
+  "   ",
+  "  ",
+  "  ",
+  "  ",
+  "   "
+]; //Girl
 
-Reference Pages: 
-  Processing Strings and Drawing Text: https://processing.org/tutorials/text/
-  Daniel Shiffman "Programming from A to Z": http://shiffman.net/a2z/intro/
-  OSC Simple Guide: https://www.jroehm.com/2015/10/a-simple-guide-to-use-osc-in-the-browser/
-  
-  p5.js Reference Pages: 
-    p5.js Refrence Page: https://p5js.org/reference/
-    p5.js Overview: https://github.com/processing/p5.js/wiki/p5.js-overview
-    Beyond the Canvas (pointers, createCanvas, createElement, etc.): https://github.com/processing/p5.js/wiki/Beyond-the-canvas
-    Convert Text to Images with JavaScript: https://www.shift8web.ca/blog/convert-text-image-javascript-html5/,
-      https://ctrlq.org/code/20056-convert-text-to-images-with-javascript
-  
-  Hammer.js Refrence Pages: http://hammerjs.github.io/api/, 
-    https://github.com/hammerjs/hammer.js/issues/241, 
-    http://hammerjs.github.io/tips/,
-    https://github.com/hammerjs/hammer.js/wiki/Getting-Started,
-    https://github.com/hammerjs/hammer.js/tree/master/
-    https://github.com/hammerjs/hammer.js/wiki/Tips-&-Tricks#horizontal-swipe-and-drag
-  
-  DOM Refrence Pages:
-    Intro to DOM manipulation and events: https://github.com/processing/p5.js/wiki/Intro-to-DOM-manipulation-and-events
-    p5.dom: https://p5js.org/reference/#/libraries/p5.dom
+//2 - Never met (Adena & Garett)
+var leftConversation2 = ["What are you from?",
+  "I can't wait. I'm from LA too! Where in LA do you live?",
+  "I was in Agoura earlier today! But I live in Encino. Hopefully moving soon though.",
+  "Haha yup the valley live. Do you live with your parents?",
+  "Oh ok! Did you go to Calabasas High? Yea in June!",
+  "No but I have friends that did! I went to Campbell Hall",
+  "Yea! I have a few friends in Brentwood and some in West Hollywood/Beverly Hills. I can't wait until I move you",
+  "Sorry I'm just seeing your response! I got dinner with my friend and got a good nights sleep haha. What are your plans for the weekend?",
+  "   ",
+  "   "
+]; //Girl
 
+var rightConversation2 = ["I'm from LA, what about you?",
+  "The 3 day weekend. I'm from LA, what about you?",
+  "We are twins! I live in Brentwood, what about you? You're in Agoura?",
+  "Oh I work in Woodland Hills and I'm from Calabasas so I know about the valley life",
+  "No my parents live in Hidden Hills, I live in Brentwood with my buddies. You just move back from college?",
+  "I did go to CHS, did you?",
+  "Ahh yes cause you lived in Encino. Do you have friends that live out the Westside by me?",
+  "Movin on out. What are you doing tonight?",
+  "   ",
+  "   "
+]; //Boy
 
-Specific Reference Pages: 
-  JSON Specific Refrence Pages: 
-    JSON: https://www.w3schools.com/js/js_json_html.asp
-    
-  DOM Specific Refrence Pages: 
-    DOM Style Left: https://www.w3schools.com/jsref/prop_style_left.asp
-  
-  Node Specific Refrence Pages: 
-    Node.js: https://www.w3schools.com/nodejs/nodejs_intro.asp
-  
-  CSS Specific Refrence Pages: 
-    CSS Text: https://www.w3schools.com/css/css_text.asp
-    Pointer Events: https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events
-    user-select: https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
-    
-  HTML Specific Refrence Pages: 
-    HTML5 Canvas: https://www.w3schools.com/html/html5_canvas.asp
-    HTML <ul>: https://www.w3schools.com/tags/tag_ul.asp
-    HTMLElements: https://www.w3schools.com/html/html_elements.asp,
-      https://developer.mozilla.org/en/docs/Web/API/HTMLElement
-    HTML <div> Tag: https://www.w3schools.com/tags/tag_div.asp
-    HTML Event Attributes: https://www.w3schools.com/tags/ref_eventattributes.asp
-    HTML Global Attributes: https://www.w3schools.com/tags/ref_standardattributes.asp
-    HTML Class Attribute: https://www.w3schools.com/html/html_classes.asp
-    HTML id Attribute: https://www.w3schools.com/tags/att_global_id.asp
-    HTML DOM Style Object: https://www.w3schools.com/jsref/dom_obj_style.asp
-    Style clip Property: https://www.w3schools.com/jsref/prop_style_clip.asp
-    Style animationFillMode Property: https://www.w3schools.com/jsref/prop_style_animationfillmode.asp
-    Style animation Property: https://www.w3schools.com/jsref/prop_style_animation.asp
-    Style position Property: https://www.w3schools.com/jsref/prop_style_position.asp
-    document.getElementById(): https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById
-    document.querySelectorAll(): https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll
-    document.getElementsByClassName(): https://developer.mozilla.org/en/docs/Web/API/Document/getElementsByClassName
-    KeyboardEvent keyCode Property: https://www.w3schools.com/jsref/event_key_keycode.asp
-    
-  p5.js Specific Refrence Pages: 
-    touchStarted(): https://p5js.org/reference/#/p5/touchStarted
-    select(): https://p5js.org/reference/#/p5/select
-    push(): https://p5js.org/reference/#/p5/push
-    p5.Element: https://p5js.org/reference/#/p5.Element
-    selectAll(): https://p5js.org/reference/#/p5/selectAll
-    Instance Container (document.body): https://p5js.org/examples/instance-mode-instance-container.html
-    createGraphics(): https://p5js.org/reference/#/p5/createGraphics
-    createDiv(): https://p5js.org/reference/#/p5/createDiv
-    createImage(): https://www.w3schools.com/jsref/prop_style_position.asp
-    Positioning your canvas: https://github.com/processing/p5.js/wiki/Positioning-your-canvas
-    .offSet(): http://api.jquery.com/offset/
-    JavaScript HTML DOM Elements: https://www.w3schools.com/js/js_htmldom_elements.asp
-    event.target: https://api.jquery.com/event.target/
-    
-  Hammer.js Specific Refrence Pages: 
-    Hammer Positions: https://github.com/hammerjs/hammer.js/issues/577
-    Hammer.Manager: https://hammerjs.github.io/jsdoc/Manager.html
-    Hammer.Swipe(options): http://hammerjs.github.io/recognizer-swipe/
-    Touch-Action: https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action, 
-      http://hammerjs.github.io/touch-action/
-    
-Forums: 
-  Hammer.js Forums: 
-    How to use Hammer to swipe: https://stackoverflow.com/questions/16873981/how-to-use-hammer-to-swipe
-    Hammer.js get DOM object where event was attached: https://stackoverflow.com/questions/29984702/hammer-js-get-dom-object-where-event-was-attached
-    How to return X and Y coordinates when using jquery.hammer.js: https://stackoverflow.com/questions/17391478/how-to-return-x-and-y-coordinates-when-using-jquery-hammer-js
-    e.center.x & y same as element .left/.top in Hammer.js 2.0?: https://stackoverflow.com/questions/17391478/how-to-return-x-and-y-coordinates-when-using-jquery-hammer-js
-    Is there a deltaX/deltaY of last event fire?: https://github.com/hammerjs/hammer.js/issues/414
+//3 - Never met (Adena & Pierce)
+var leftConversation3 = ["Hey *** you're a Gaucho! How's your night going?",
+  "Yep! I live in Mar Vista how about you?",
+  "What do you do for work?",
+  "Wow nice, political science major? I do advertising for Apple and Apple Music",
+  "Nice I was a comm major, I took a global studies class and love it though. It was global disapora. What do you have going on this weekend?",
+  "Same I'm going out tomorrow. What are you up to Saturday night? I'm down to get drinks",
+  "  ",
+  "  ",
+  "  ",
+  "  "
+]; //Boy
 
-  HTML/CSS Forums: 
-    Calling CSS in JavaScript: https://www.sitepoint.com/community/t/calling-css-in-javascript/7199
-    How to create a <style> tag with JavaScript: https://stackoverflow.com/questions/524696/how-to-create-a-style-tag-with-javascript
-    Is there anyway that I can give a div a function in p5.js: https://github.com/processing/p5.js/wiki/Positioning-your-canvas
-    
-  p5.js Forums: 
-    What's the best way to generate image from text using JavaScript and HTML5 APIs?: https://hashnode.com/post/whats-the-best-way-to-generate-image-from-text-using-javascript-and-html5-apis-cik6k8rbj01izxy53619llzzp
-    How can I generate an image based on text and CSS?: https://stackoverflow.com/questions/17618574/how-can-i-generate-an-image-based-on-text-and-css
-    Equivalent of pTouchX/Y for objects in 'touches[]': https://github.com/processing/p5.js/issues/1478
-    Array of Images p5.js: https://stackoverflow.com/questions/40652443/array-of-images-p5-js
-*/
+var rightConversation3 = ["Yes you also went to UCSB!! Where do you live?",
+  "Oh okay not too far from me. I live in Encino",
+  "I work for a state assembly member. How about you?",
+  "Global studies but it's so similar. Oh no way. That's really cool. What did you study at UCSB?",
+  "Oh really! I don't think I ever took that class but I loved global studies. I think I'm going out with some friends tomorrow night but thats about it. How about you?",
+  "I have no plans as of now. I'm down to get drinks!",
+  "  ",
+  "  ",
+  "   ",
+  "   "
+]; //Girl
 
-//Content
-var message = ["Miss *** that smile.",
-  "Hurry up and move here.",
-  "It was global disaporta.",
-  "What do you have going on this weekend?.",
-  "Same I'm going out tomorrow.",
-  "What are you up to Saturday night? I'm down to get drinks.",
-  "Where do you live?", "What do you do?",
-  "That's amazing! What kind of music do you guys play?",
-  "It's similar to Maroon 5, but a little more urban if that makes sense lol."
-];
+//4 - Never met (Justin & Stormi)
+var leftConversation4 = ["Hello there, how are you doing? I love your name, bad ass haha",
+  "I'm doing fantastic, out with some friends on a small road trip vacation. I genuinely think I had the greatest weekend of this year so far haha. Sad to leave tomorrow but ready for my own bed haha. How was your weekend?",
+  "That's awesome! We both had good weekend. Gotta keep the trend going for this month haha. And good morning to you :) I had to get up really early so we could drive back. And it's my shift at the wheel",
+  "Dont worry! I survived haha. Oh man hopefully you can have some fun before you sleep :)",
+  "Oh no!! Not much time for sleep hahah, sleep is definitely still a win though",
+  "No passed out hard after that drive haha",
+  "Let me get your number then :)",
+  "  ",
+  "  ",
+  "  "
+]; //Boy
 
-var message2 = ["What kind of dog do you have?",
-  "So this will have to be a short bu furious romance ;)",
-  "I'm a writer.",
-  "So what are your plans for later?",
-  "Well I was hoping to meet a charming young photographer for a drink.",
-  "So what do we do now? (: x",
-  "Right so where do you know that you can take me for a drink?",
-  "Haha OK not too intimidating! Do you want to meet up for a drink?",
-  "Really close friend of mine in IV. I actually have his name tattooed on me haha.",
-  "Holy shit I totally remember that!"
-];
+var rightConversation4 = ["Haha thank you! And I'm good. How are you?",
+  "My weekend was actually really really good. I can't complain! I'm glad you had a great weekend as well. Good morning btw :)",
+  "Ahhhhh i hope you survived your shift at the wheel! I had a super busy Monday man all I did was homework lol",
+  "Haha I have to be up at 5 I'm not excited",
+  "It definitely is lol",
+  "Haha nice. Sorry for the lag I never get on here!!",
+  "  ",
+  "  ",
+  "   ",
+  "   "
+]; //Girl
+
+//5 - Never met (Justin & Taylor)
+var leftConversation5 = ["Hey ***, how are you doing?",
+  "I'm good just out with some friends. Where are you from?",
+  "I'm from Tri Valley, across the bridge. Moved to LA though haha, guess we kinda swapped",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  "
+]; //Boy
+
+var rightConversation5 = ["Pretty good. How are you doing?",
+  "I'm from Orange County. Hbu?",
+  "Haha guess we did XD",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  "
+]; //Girl
+
+//6 - Never met (Justin & Jayda)
+var leftConversation6 = ["Hey there, how you doing?",
+  "Headed out tonight. What are you up to?",
+  "What are you and your friends about to do?",
+  "Well are you and your cute friends trying to do something eventful?",
+  "Lame",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  "
+]; //Boy
+
+var rightConversation6 = ["good haha I've been busy af. I'm in Colorado on vacation haha",
+  "just with friends lol",
+  "just hang out lol",
+  "probably not",
+  "I know right",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  "
+]; //Girl
+
+//7 - Never met (Justin & Ariella)
+var leftConversation7 = ["Hey what's up",
+  "Always been a Ravenclaw haha. Just out right now with a friend right now. How was your weekend?",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  "
+]; //Boy
+
+var rightConversation7 = ["I got sorted into ravrnclaw, but I've always thought myself to be a gryffendor. Nm, hbu?",
+  "I probably have too judging by how much I like to read, just been in denile. Pretty lame, I have finals coming up. How was yours?",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  ",
+  "  "
+]; //Girl
+
+//8 - Met once (Me & christopher) - Shortened
+var leftConversation8 = ["I'm out in California next month, any advice?",
+  "We've got a place booked in West Hollywood and I've got a session out in Oakland for a couple nights",
+  "Amazing! I'll definitely check those out. Thank you :) So what made you give up sunny California for gloomy London?",
+  "Fair enough, how long are you here for? I'm going for music, got a few writing sessions and meetings",
+  "Oh right so you're planning on staying for a while. Where abouts are you staying?",
+  "Ah that's a dope area! I'm down in ***. Do you usually have weekends off, do you wanna grab a drink sometime?",
+  "Ah that's perfect then! How's Friday sound?",
+  "Awesome. Gimmie your number and I'll drop you a text sometime on Friday :)",
+  "  ",
+  "  "
+]; //Boy
+
+var rightConversation8 = ["Hmm. What part of California will you be in?",
+  "Well I'm from the Bay Area so can give ya some recommendations there. West Hollywood, hm. Oh, adults only is a really sick speakeasy.",
+  "Grad school. I got into *** and figured why not haha. What are you doing out in California? Just decided to take a visit?",
+  "Have another year left on my visa but I've been applying to jobs. Ah okay. California is a great place for that for sure haha",
+  "Yea, that's the idea haha. I'm moving to ***. How about you?",
+  "Haha I live in *** right now. I do. Yea, I'm up for it (:",
+  "Friday woeks for me (:",
+  "*** Sounds good (:",
+  "  ",
+  "  "
+]; //Girl
+
+//9 - Met twice and kept in touch (Me & Toby) - shortened by a lot - can title it with "Well then, a walk on the beach." - what happened that night 
+var leftConversation9 = ["Mademoiselle. How are you this fine Saturday?",
+  "Similarly, taking the pup for a walk. I've just returned from South America, so it's the simple things in life...What kind of dog do you have?",
+  "Just traveling around the continent for the past 5 months. Was pretty great but feels weird being back. Golden retriever, of course :)",
+  "Awesome. You're gonna have an amazing time. Just to study?",
+  "Hah. Yeah it's good to get out. And Florence is an amazing city. You in school here?",
+  "Nono, I'm a grandpa. I live in NY. Just in town for a few days to help my parents move on my way back from South America",
+  "Yea it's the best. So this will have to be a short but furious romance ;)",
+  "You'd be surprised. I'm a writer. And you? What do you study?",
+  "Well then. With two artistes involved, it will almost assuredly be romantic, and almost certainly furious...So what are your plans for later?",
+  "Well I was hoping to meet a charming young photographer for a drink"
+]; //Boy
+
+var rightConversation9 = ["Hello (: Well, thank you. Just relaxing with my dog. How about yourself?",
+  "That's exciting. What were you doing there? I have a little Pomeranian mix. He's a rescue and they didn't know much about it when I adopted him. What kind of dog do you have?",
+  "Oh wow. You were gone for a while haha. I woul dimagine that being weird. I'm about to go through the same thing. I'm heading over to London and then staying in Florence for like 4 months. Aw! Golden retrievers are adorable.",
+  "I hope so! I'm nervous. Mhm. I figured I'd try it out since I've lived in California my entire life haha.",
+  "Very true. I fell in love with it when I went about 2 years back. Mhm. I go to UCSB. Are you in school?",
+  "Ah, I see. NY is amazing. I'm hoping to move there for grad school in a year.",
+  "What do you do in NY? Hahahahaha a few days, huh. Idk how much of a romance that could be (;",
+  "I'd like to think I may be (; oh, nice! A fellow artist. Haha. I'm an art major and an art history minor. Photographer and digital/visual artist.",
+  "Hahahahahahaha you have something there. I'm not sure yet. How about you?",
+  "  "
+]; //Girl
+
+var conversations = new Array(); //array of conversation objects
+var currentConversation = 0;
 
 //Speech
-var theVoice = new p5.Speech('Google UK English Male'); // new P5.Speech object
-theVoice.onStart = startSpeaking; //Speech start
-theVoice.onEnd = endSpeaking; //Speech end
 var speaking = false;
+//Left Conversation Speech
+var leftVoice = new p5.Speech('Google UK English Male'); // new P5.Speech object
+leftVoice.onStart = startSpeakingLeft; //Speech start
+leftVoice.onEnd = endSpeakingLeft; //Speech end
+var leftSpeaking = false;
 
-var conversation1;
-var conversation2;
+//Right Conversation Speech
+var rightVoice = new p5.Speech('Google UK English Female'); // new P5.Speech object
+rightVoice.onStart = startSpeakingRight; //Speech start
+rightVoice.onEnd = endSpeakingRight; //Speech end
+var rightSpeaking = false;
+
+function saySomethingLeft(aThingToSay) {
+  leftVoice.speak(aThingToSay);
+}
+
+function saySomethingRight(aThingToSay) {
+  rightVoice.speak(aThingToSay);
+}
+
+function startSpeakingLeft() {
+  leftSpeaking = true;
+}
+
+function endSpeakingLeft() {
+  leftSpeaking = false;
+}
+
+function startSpeakingRight() {
+  rightSpeaking = true;
+}
+
+function endSpeakingRight() {
+  rightSpeaking = false;
+}
 
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(800, 800); //This will need to be fullScreen
 
+  //Text 
   textFont("Times");
   textSize(20);
   textAlign(CENTER);
   smooth();
-  var conversation1Colour = color(255, 255, 255);
-  var conversation2Colour = color(255, 0, 0);
 
-  conversation1 = new Conversation(message, conversation1Colour);
-  conversation2 = new Conversation(message2, conversation2Colour);
+  //Conversation Text Colors
+  var boyColour = color(103, 170, 255); //Blue color(165, 201, 247); 
+  var girlColour = color(255, 144, 211); //Pink color(247, 165, 213);
+
+  //Create a new Conversation and send it conversations and conversation colors
+  append(conversations, new Conversation("They broke up", leftConversation1, rightConversation1, boyColour, girlColour)); //Conversation 1
+  append(conversations, new Conversation("They got married", leftConversation2, rightConversation2, girlColour, boyColour)); //Conversation 2
+  append(conversations, new Conversation("Gauchos", leftConversation3, rightConversation3, boyColour, girlColour)); //Conversation 3
+  append(conversations, new Conversation("They got married", leftConversation4, rightConversation4, boyColour, girlColour)); //Conversation 4
+  append(conversations, new Conversation("They broke up", leftConversation5, rightConversation5, boyColour, girlColour)); //Conversation 5
+  append(conversations, new Conversation("They got married", leftConversation6, rightConversation6, boyColour, girlColour)); //Conversation 6
+  append(conversations, new Conversation("Ravenclaw vs. Gryffendor", leftConversation7, rightConversation7, boyColour, girlColour)); //Conversation 7
+  append(conversations, new Conversation("Neighbors?", leftConversation8, rightConversation8, boyColour, girlColour)); //Conversation 8
+  append(conversations, new Conversation("Well then, a walk on the beach", leftConversation9, rightConversation9, boyColour, girlColour)); //Conversation 9
+
+  //Gestures
+  var options = { //Set options to prevent default behaviors for swipe, pinch, etc
+    preventDefault: true
+  };
+
+  var hammer = new Hammer(document.body, options); //Document.body registers gestures anywhere on the page
+  //Swipe Setup
+  hammer.get('swipe').set({
+    direction: Hammer.DIRECTION_ALL
+  });
+
+  //Double Tap Setup 
+  hammer.get('doubletap').set({
+    direction: Hammer.DIRECTION_ALL
+  });
+
+  hammer.on("swipe", swiped); //Swipe 
+  hammer.on("doubletap", doubleTap); //Double Tap
 }
 
 function draw() {
-  background(0);
+  background(255);
 
-  conversation1.update();
-  conversation2.update();
-
-  conversation1.draw();
-  conversation2.draw();
-
-  tabletFunctions();
+  //Conversations
+  conversations[currentConversation].update();
+  conversations[currentConversation].draw();
 }
 
-function keyPressed() {
-  if (keyCode == SHIFT) {
-    if (!speaking) { //only speak if we are not already speaking
-      //choose which conversation we want to start with
-      var randomNumber = random();
-      //console.log("The random number is: "+randomNumber);
-      if (randomNumber > 0.5) {
-        //console.log("Conversation 1 is about to say something");
-        saySomething(conversation1);
-      } else {
-        //console.log("Conversation 2 is about to say something");
-        saySomething(conversation2);
-      }
+function swiped(event) {
+  if (event.direction == 4) { //right swipe
+    conversations[currentConversation].nextInConversation();
+
+  } else if (event.direction == 2) { //left swipe
+    currentConversation++
+
+    if (currentConversation >= conversations.length) {
+      currentConversation = 0;
     }
   }
 }
 
-function tabletFunctions() { //http://www.webdevbreak.com/episodes/touch-gestures-hammerjs/demo
-  var swipeOptions = { dragLockToAxis: true, dragBlockHorizontal: true };
-  var mc = new Hammer(document.body, swipeOptions); //document.body enables swipe to be detected anywhere on the screen
-  mc.set({ enable: true }); //http://hammerjs.github.io/api/
-  mc.on("swipeleft swiperight tap press", function(ev) { //gestures
-    console.log(ev.type + "gesture detected.");
-  });
-  
-  if (mc.on = conversation1.x && conversation1.y) {
-    console.log("touch");
+function doubleTap(event) {
+  conversations[currentConversation].doubleTapped();
+}
+
+function Conversation(title, leftMessages, rightMessages, leftColour, rightColour) { //https://github.com/processing/p5.js/wiki/JavaScript-basics#using-parameters for how to make classes and constructors
+  this.title = title;
+  this.leftMessages = leftMessages;
+  this.rightMessages = rightMessages;
+  this.leftColour = leftColour;
+  this.rightColour = rightColour;
+
+  if (this.leftMessages.length != this.rightMessages.length) {
+    //LEFT AND RIGHT MESSAGES MUST BE THE SAME LENGTH, SO ERROR MESSAGE
+    console.log("BIG TROUBLE! LEFT AND RIGHT MESSAGES MUST BE THE SAME LENGTH")
   }
- }
 
-function saySomething(aConversation) {
-  var randomIndexToThingToSay = Math.floor(random(aConversation.messages.length)); //https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
-  var thingToSay = aConversation.messages[randomIndexToThingToSay];
+  this.leftPositions = new Array(this.leftMessages.length);
+  this.leftVelocities = new Array(this.leftMessages.length);
+  this.rightPositions = new Array(this.rightMessages.length);
+  this.rightVelocities = new Array(this.rightMessages.length);
+  this.staticMessage = 0
+  this.staticLeftPosition = createVector(width / 4, height / 2);
+  this.staticRightPosition = createVector((width / 4) * 3, height / 2);
 
-  //randomize voice and speak word:
-  //theVoice.setVoice(Math.floor(random(theVoice.voices.length)));
-  //console.log("I'm going to say "+thingToSay);
-  theVoice.speak(thingToSay);
-}
+  for (var i = 0; i < this.leftMessages.length; i++) { //Assigns random positions and velocities to all messages 
+    this.leftPositions[i] = createVector(random(width / 2), random(height / 2)); //https://p5js.org/reference/#/p5.Vector
+    this.leftVelocities[i] = createVector(random(1, 5), random(1, 5)); //https://p5js.org/reference/#/p5/random
+    this.rightPositions[i] = createVector(random(width / 2), random(height / 2)); //https://p5js.org/reference/#/p5.Vector
+    this.rightVelocities[i] = createVector(random(1, 5), random(1, 5)); //https://p5js.org/reference/#/p5/random    
+  }
 
-function startSpeaking() {
-  //console.log("I'm starting to speak");
-  speaking = true;
-}
+  this.doubleTapped = function() {
+    if (!speaking) {
+      saySomethingLeft(this.leftMessages[this.staticMessage]);
+    }
+    if (!leftSpeaking) {
+      saySomethingRight(this.rightMessages[this.staticMessage]);
+    }
+  }
 
-function endSpeaking() {
-  //console.log("I've finished speaking");
-  speaking = false;
-}
+  this.nextInConversation = function() {
+    this.staticMessage++; //increment
+    if (this.staticMessage >= this.leftMessages.length) { //we use this.leftMessages because both arrays are the same length
+      this.staticMessage = 0; //if it's too long, reset to 0
+    }
+  }
 
-function Conversation(someMessages, aColour) { //https://github.com/processing/p5.js/wiki/JavaScript-basics#using-parameters for how to make classes and constructors
-  this.messages = someMessages; //Recieves conversation1 or conversation2 in the setup when class is initialized 
-  this.colour = aColour; //Recieves conversation1Colour or conversation2Colour in the setup when class is initialized 
-  this.positions = new Array(this.messages.length); //Array to hold messages (ellipses) positions
-  this.velocities = new Array(this.messages.length); //Array to hold the velocity of each messages (ellipse)
-
-
-  for (var i = 0; i < this.messages.length; i++) { //Moves all messages (ellipses) in random directions & assigns random positions and velocities 
-    this.positions[i] = createVector(random(width / 2), random(height / 2)); //https://p5js.org/reference/#/p5.Vector
-    this.velocities[i] = createVector(random(1), random(1)); //https://p5js.org/reference/#/p5/random
+  this.previousInConversation = function() { //this is never called now, you can't go back in time!
+    this.staticMessage--; //decrement
+    if (this.staticMessage < 0) {
+      this.staticMessage = this.leftMessages.length - 1; //-1 because we number from 0 AND we use this.leftMessages because both arrays are the same length
+    }
   }
 
   this.update = function() { //adds the positions and the velocities together to get animation
-    for (var i = 0; i < this.messages.length; i++) { //for all the messages
-      this.positions[i].add(this.velocities[i]); //add the velocity to the position to move it correctly on this frame
+    for (var i = 0; i < this.leftMessages.length; i++) { //for all the messages
+      if (i != this.staticMessage) {
+        this.leftPositions[i].add(this.leftVelocities[i]); //add the velocity to the position to move it correctly on this frame
+        this.rightPositions[i].add(this.rightVelocities[i]); //add the velocity to the position to move it correctly on this frame
 
-      if (this.positions[i].x > width || this.positions[i].x < 0) {
-        //if the x position is to the left of the screen or to the right, flip the velocity so that it bounces back into view
-        this.velocities[i].x *= -1;
-      }
+        if (this.leftPositions[i].x > width || this.leftPositions[i].x < 0) {
+          //if the x position is to the left of the screen or to the right, flip the velocity so that it bounces back into view
+          this.leftVelocities[i].x *= -1;
+        }
 
-      if (this.positions[i].y > height || this.positions[i].y < 0) {
-        //if the x position is to the left of the screen or to the right, flip the velocity so that it bounces back into view
-        this.velocities[i].y *= -1;
+        if (this.rightPositions[i].x > width || this.rightPositions[i].x < 0) {
+          //if the x position is to the left of the screen or to the right, flip the velocity so that it bounces back into view
+          this.rightVelocities[i].x *= -1;
+        }
+
+        if (this.leftPositions[i].y > height || this.leftPositions[i].y < 0) {
+          //if the y position is to the top of the screen or to the bottom, flip the velocity so that it bounces back into view
+          this.leftVelocities[i].y *= -1;
+        }
+
+        if (this.rightPositions[i].y > height || this.rightPositions[i].y < 0) {
+          //if the y position is to the top of the screen or to the bottom, flip the velocity so that it bounces back into view
+          this.rightVelocities[i].y *= -1;
+        }
+
+      } else {
+        //it is the static message, position in the middle of the screen
+        this.leftPositions[i].x = this.staticLeftPosition.x;
+        this.leftPositions[i].y = this.staticLeftPosition.y;
+
+        this.rightPositions[i].x = this.staticRightPosition.x;
+        this.rightPositions[i].y = this.staticRightPosition.y;
       }
     }
   }
 
+
   this.draw = function() {
-    for (var i = 0; i < this.messages.length; i++) { //for all the messages
-      var currentMessage = this.messages[i]; //get the current message
-      //console.log("We are looking at this message: "+message);
-      var positionOfMessage = this.positions[i]; //get the current position
-      var widthOfMessage = textWidth(currentMessage); //get width (length) of each message
-      var radiusOfMessage = (widthOfMessage + 5) / (2 * PI); //equation for radius, 5 is added for a bit of padding
-      var arcLength = 0;
+    fill((red(leftColour) + red(rightColour)) / 2, (green(leftColour) + green(rightColour)) / 2, (blue(leftColour) + blue(rightColour)) / 2)
+    text(this.title, width / 2, 100);
 
-      for (var j = 0; j < currentMessage.length; j++) { //for each message individually (which ever message is currently in the loop)
-        var currentCharacter = currentMessage.charAt(j);
-        var characterWidth = textWidth(currentCharacter); //gets the width (length) of each character
+    for (var i = 0; i < this.leftMessages.length; i++) { //for all the messages
+      var currentMessage = this.leftMessages[i]; //get the current message
+      var isStatic = (this.staticMessage == i);
+      this.drawMessage(currentMessage, this.leftPositions[i], isStatic, this.leftColour);
+    }
 
-        arcLength += characterWidth / 2; //move along the arc, half the width of the character at a time
-        var theta = PI + arcLength / radiusOfMessage; //theta (angle of change) is equal to PI (offset) + arclength
+    for (var i = 0; i < this.rightMessages.length; i++) { //for all the messages
+      var currentMessage = this.rightMessages[i]; //get the current message
+      var isStatic = (this.staticMessage == i);
+      this.drawMessage(currentMessage, this.rightPositions[i], isStatic, this.rightColour);
+    }
+  }
 
-        push();
-        translate((radiusOfMessage * cos(theta)) + positionOfMessage.x, (radiusOfMessage * sin(theta)) + positionOfMessage.y);
-        rotate(theta + PI / 2); //rotates each letter accordingly around ellipse to create a more fluid circle 
-        fill(this.colour); //gives each ellipse the color assigned during setup and initialization of the class 
-        text(currentCharacter, 0, 0);
-        pop();
+  this.drawMessage = function(aMessage, aPosition, aStatic, aColour) {
+    var currentMessage = aMessage;
+    var positionOfMessage = aPosition;
+    var isStatic = aStatic;
+    var theColour = aColour;
+    var widthOfMessage = textWidth(currentMessage); //get width (length) of each message
+    var radiusOfMessage = (widthOfMessage + 5) / (2 * PI); //equation for radius, 5 is added for a bit of padding
+    //console.log(int(radiusOfMessage));
+    var arcLength = 0;
 
-        arcLength += characterWidth / 2; //move along the arc, half the width of the character at a time
+    for (var j = 0; j < currentMessage.length; j++) { //for each message individually (which ever message is currently in the loop)
+      var currentCharacter = currentMessage.charAt(j);
+      var characterWidth = textWidth(currentCharacter); //gets the width (length) of each character
+
+      arcLength += characterWidth / 2; //move along the arc, half the width of the character at a time
+      var theta = PI + arcLength / radiusOfMessage; //theta (angle of change) is equal to PI (offset) + arclength
+
+      push();
+      translate((radiusOfMessage * cos(theta)) + positionOfMessage.x, (radiusOfMessage * sin(theta)) + positionOfMessage.y);
+      rotate(theta + PI / 2); //rotates each letter accordingly around ellipse to create a more fluid circle 
+      if (!isStatic) {
+        fill(red(theColour), green(theColour), blue(theColour), 50); //gives each ellipse the color assigned during setup and initialization of the class 
+      } else {
+        fill(red(theColour), green(theColour), blue(theColour)); //special colour
       }
+      text(currentCharacter, 0, 0);
+      pop();
+
+      arcLength += characterWidth / 2; //move along the arc, half the width of the character at a time
     }
   }
 }
