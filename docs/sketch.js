@@ -194,7 +194,7 @@ var rightConversation8 = ["Hmm. What part of California will you be in?",
   "Have another year left on my visa but I've been applying to jobs. Ah okay. California is a great place for that for sure haha",
   "Yea, that's the idea haha. I'm moving to ***. How about you?",
   "Haha I live in *** right now. I do. Yea, I'm up for it (:",
-  "Friday woeks for me (:",
+  "Friday works for me (:",
   "*** Sounds good (:",
   "  ",
   "  "
@@ -225,20 +225,21 @@ var rightConversation9 = ["Hello (: Well, thank you. Just relaxing with my dog. 
   "  "
 ]; //Girl
 
-var conversations = new Array(); //array of conversation objects
-var currentConversation = 0;
+var conversations = new Array(); //Array of conversation objects
+var currentConversation = 0; //Current conversation index 
+
+//Used for swipping (Using the app BetterTouchTool I have converted swipes into keyPressed to execute the swipping gesture)
+var value = 0;
 
 //Speech
 var speaking = false;
 var leftSpeaking = false;
-
 //Male Conversation Speech
-var maleVoice = new p5.Speech('Google UK English Male'); // new P5.Speech object
+var maleVoice = new p5.Speech('Google UK English Male'); //New P5.Speech object
 maleVoice.onStart = true; //Speech start
 maleVoice.onEnd = false; //Speech end
-
 //Female Conversation Speech
-var femaleVoice = new p5.Speech('Google UK English Female'); // new P5.Speech object
+var femaleVoice = new p5.Speech('Google UK English Female'); //New P5.Speech object
 femaleVoice.onStart = true; //Speech start
 femaleVoice.onEnd = false; //Speech end
 
@@ -246,44 +247,24 @@ function setup() {
   createCanvas(800, 800); //This will need to be fullScreen
 
   //Text 
-  textFont("Times");
-  textSize(20);
+  textFont("Verdana");
+  textSize(15);
   textAlign(CENTER);
   smooth();
 
-  //Conversation Text Colors
-  var maleColour = color(103, 170, 255); //Blue color(165, 201, 247); 
-  var femaleColour = color(255, 144, 211); //Pink color(247, 165, 213);
-
   //Create a new Conversation and send it conversations and conversation colors
-  append(conversations, new Conversation("They broke up", leftConversation1, rightConversation1, maleColour, femaleColour, maleVoice, femaleVoice)); //Conversation 1
-  append(conversations, new Conversation("They got married", leftConversation2, rightConversation2, femaleColour, maleColour, femaleVoice, maleVoice)); //Conversation 2
-  append(conversations, new Conversation("Gauchos", leftConversation3, rightConversation3, maleColour, femaleColour, maleVoice, femaleVoice)); //Conversation 3
-  append(conversations, new Conversation("They got married", leftConversation4, rightConversation4, maleColour, femaleColour, maleVoice, femaleVoice)); //Conversation 4
-  append(conversations, new Conversation("They broke up", leftConversation5, rightConversation5, maleColour, femaleColour, maleVoice, femaleVoice)); //Conversation 5
-  append(conversations, new Conversation("They got married", leftConversation6, rightConversation6, maleColour, femaleColour, maleVoice, femaleVoice)); //Conversation 6
-  append(conversations, new Conversation("Ravenclaw vs. Gryffendor", leftConversation7, rightConversation7, maleColour, femaleColour, maleVoice, femaleVoice)); //Conversation 7
-  append(conversations, new Conversation("Neighbors?", leftConversation8, rightConversation8, maleColour, femaleColour, maleVoice, femaleVoice)); //Conversation 8
-  append(conversations, new Conversation("Well then, a walk on the beach", leftConversation9, rightConversation9, maleColour, femaleColour, maleVoice, femaleVoice)); //Conversation 9
-
-  //Gestures
-  var options = { //Set options to prevent default behaviors for swipe, pinch, etc
-    preventDefault: true
-  };
-
-  var hammer = new Hammer(document.body, options); //Document.body registers gestures anywhere on the page
-  //Swipe Setup
-  hammer.get('swipe').set({
-    direction: Hammer.DIRECTION_ALL
-  });
-
-  //Double Tap Setup 
-  hammer.get('doubletap').set({
-    direction: Hammer.DIRECTION_ALL
-  });
-
-  hammer.on("swipe", swiped); //Swipe 
-  hammer.on("doubletap", doubleTap); //Double Tap
+  append(conversations, new Conversation("Boy Band", leftConversation1, rightConversation1, maleVoice, femaleVoice)); //Conversation 1
+  append(conversations, new Conversation("'We are twins!'", leftConversation2, rightConversation2, femaleVoice, maleVoice)); //Conversation 2
+  append(conversations, new Conversation("Gauchos", leftConversation3, rightConversation3, maleVoice, femaleVoice)); //Conversation 3
+  append(conversations, new Conversation("Swapped", leftConversation4, rightConversation4, maleVoice, femaleVoice)); //Conversation 4
+  append(conversations, new Conversation("They broke up", leftConversation5, rightConversation5, maleVoice, femaleVoice)); //Conversation 5
+  append(conversations, new Conversation("Maybe another night?", leftConversation6, rightConversation6, maleVoice, femaleVoice)); //Conversation 6
+  append(conversations, new Conversation("Ravenclaw vs. Gryffendor", leftConversation7, rightConversation7, maleVoice, femaleVoice)); //Conversation 7
+  append(conversations, new Conversation("Neighbors?", leftConversation8, rightConversation8, maleVoice, femaleVoice)); //Conversation 8
+  append(conversations, new Conversation("'Well then, a walk on the beach'", leftConversation9, rightConversation9, maleVoice, femaleVoice)); //Conversation 9
+  
+  //Enable Gestures
+  Gestures();
 }
 
 function draw() {
@@ -294,29 +275,53 @@ function draw() {
   conversations[currentConversation].draw();
 }
 
-function swiped(event) {
-  if (event.direction == 4) { //right swipe
-    conversations[currentConversation].nextInConversation();
+function Gestures() {
+  var options = { //Set options to prevent default behaviors for swipe, pinch, etc. (https://github.com/hammerjs/hammer.js/wiki/Tips-&-Tricks#best-practices)
+    preventDefault: true,
+    dragLockToAxis: true,
+    dragBlockHorizontal: true
+  };
 
-  } else if (event.direction == 2) { //left swipe
-    currentConversation++
+  var hammer = new Hammer(document.body, options); //Document.body registers gestures anywhere on the page
 
-    if (currentConversation >= conversations.length) {
+  // hammer.on("swipe", function(event) { //Swipe
+  //   if (event.direction == 4 || value) { //Right swipe
+  //     conversations[currentConversation].nextInConversation();
+
+  //   } else if (event.direction == 2 || value) { //Left swipe
+  //     currentConversation++
+
+  //     if (currentConversation >= conversations.length) {
+  //       currentConversation = 0;
+  //     }
+  //   }
+  //   // console.log(event);
+  // });
+
+  hammer.on("doubletap", function(event) { //Double tap 
+    conversations[currentConversation].saySomething(); //Say current conversation 
+  });
+}
+
+function keyPressed() {
+  if (keyCode === RIGHT_ARROW) { //Right Swipe
+    // value = 4;
+    conversations[currentConversation].nextInConversation(); //Next pair of ellipses fill static position
+  }
+
+  if (keyCode === LEFT_ARROW) { //Left Swipe
+    // value = 2;
+    currentConversation++ //New conversation 
+    if (currentConversation >= conversations.length) { //Loops back through conversations when the program has reached the last conversation
       currentConversation = 0;
     }
   }
 }
 
-function doubleTap(event) {
-  conversations[currentConversation].doubleTapped();
-}
-
-function Conversation(title, leftMessages, rightMessages, leftColour, rightColour, leftVoice, rightVoice) { //https://github.com/processing/p5.js/wiki/JavaScript-basics#using-parameters for how to make classes and constructors
-  this.title = title;
+function Conversation(title, leftMessages, rightMessages, leftVoice, rightVoice) { //https://github.com/processing/p5.js/wiki/JavaScript-basics#using-parameters for how to make classes and constructors
+  this.title = title; //Conversation
   this.leftMessages = leftMessages;
   this.rightMessages = rightMessages;
-  this.leftColour = leftColour;
-  this.rightColour = rightColour;
   this.leftVoice = leftVoice;
   this.rightVoice = rightVoice;
 
@@ -325,13 +330,20 @@ function Conversation(title, leftMessages, rightMessages, leftColour, rightColou
     console.log("BIG TROUBLE! LEFT AND RIGHT MESSAGES MUST BE THE SAME LENGTH")
   }
 
+  //Text Colour
+  var leftColour = color(random(255), random(255), random(255));
+  var rightColour = color(random(255), random(255), random(255));
+
+  //Positions and Velocities
   this.leftPositions = new Array(this.leftMessages.length);
   this.leftVelocities = new Array(this.leftMessages.length);
   this.rightPositions = new Array(this.rightMessages.length);
   this.rightVelocities = new Array(this.rightMessages.length);
+
+  //Left and Right Static Messages 
   this.staticMessage = 0
-  this.staticLeftPosition = createVector(width / 4, height / 2);
-  this.staticRightPosition = createVector((width / 4) * 3, height / 2);
+  this.staticLeftPosition = createVector(width / 3, height / 3);
+  this.staticRightPosition = createVector((width / 3) * 2, height / 2);
 
   for (var i = 0; i < this.leftMessages.length; i++) { //Assigns random positions and velocities to all messages 
     this.leftPositions[i] = createVector(random(width / 2), random(height / 2)); //https://p5js.org/reference/#/p5.Vector
@@ -340,20 +352,12 @@ function Conversation(title, leftMessages, rightMessages, leftColour, rightColou
     this.rightVelocities[i] = createVector(random(1, 5), random(1, 5)); //https://p5js.org/reference/#/p5/random    
   }
 
-  this.saySomethingLeft = function(aThingToSay) {
-    leftVoice.speak(aThingToSay);
-  }
-
-  this.saySomethingRight = function(aThingToSay) {
-    rightVoice.speak(aThingToSay);
-  }
-
-  this.doubleTapped = function() {
+  this.saySomething = function() {
     if (!speaking) {
-      this.saySomethingLeft(this.leftMessages[this.staticMessage]);
+      this.leftVoice.speak(this.leftMessages[this.staticMessage]);
     }
     if (!leftSpeaking) {
-      this.saySomethingRight(this.rightMessages[this.staticMessage])
+      this.rightVoice.speak(this.rightMessages[this.staticMessage])
     }
   }
 
@@ -377,23 +381,15 @@ function Conversation(title, leftMessages, rightMessages, leftColour, rightColou
         this.leftPositions[i].add(this.leftVelocities[i]); //add the velocity to the position to move it correctly on this frame
         this.rightPositions[i].add(this.rightVelocities[i]); //add the velocity to the position to move it correctly on this frame
 
-        if (this.leftPositions[i].x > width || this.leftPositions[i].x < 0) {
+        if (this.leftPositions[i].x > width || this.leftPositions[i].x < 0 || this.rightPositions[i].x > width || this.rightPositions[i].x < 0) {
           //if the x position is to the left of the screen or to the right, flip the velocity so that it bounces back into view
           this.leftVelocities[i].x *= -1;
-        }
-
-        if (this.rightPositions[i].x > width || this.rightPositions[i].x < 0) {
-          //if the x position is to the left of the screen or to the right, flip the velocity so that it bounces back into view
           this.rightVelocities[i].x *= -1;
         }
 
-        if (this.leftPositions[i].y > height || this.leftPositions[i].y < 0) {
+        if (this.leftPositions[i].y > height || this.leftPositions[i].y < 0 || this.rightPositions[i].y > height || this.rightPositions[i].y < 0) {
           //if the y position is to the top of the screen or to the bottom, flip the velocity so that it bounces back into view
           this.leftVelocities[i].y *= -1;
-        }
-
-        if (this.rightPositions[i].y > height || this.rightPositions[i].y < 0) {
-          //if the y position is to the top of the screen or to the bottom, flip the velocity so that it bounces back into view
           this.rightVelocities[i].y *= -1;
         }
 
@@ -415,13 +411,13 @@ function Conversation(title, leftMessages, rightMessages, leftColour, rightColou
     for (var i = 0; i < this.leftMessages.length; i++) { //for all the messages
       var currentMessage = this.leftMessages[i]; //get the current message
       var isStatic = (this.staticMessage == i);
-      this.drawMessage(currentMessage, this.leftPositions[i], isStatic, this.leftColour);
+      this.drawMessage(currentMessage, this.leftPositions[i], isStatic, leftColour);
     }
 
     for (var i = 0; i < this.rightMessages.length; i++) { //for all the messages
       var currentMessage = this.rightMessages[i]; //get the current message
       var isStatic = (this.staticMessage == i);
-      this.drawMessage(currentMessage, this.rightPositions[i], isStatic, this.rightColour);
+      this.drawMessage(currentMessage, this.rightPositions[i], isStatic, rightColour);
     }
   }
 
@@ -432,7 +428,6 @@ function Conversation(title, leftMessages, rightMessages, leftColour, rightColou
     var theColour = aColour;
     var widthOfMessage = textWidth(currentMessage); //get width (length) of each message
     var radiusOfMessage = (widthOfMessage + 5) / (2 * PI); //equation for radius, 5 is added for a bit of padding
-    //console.log(int(radiusOfMessage));
     var arcLength = 0;
 
     for (var j = 0; j < currentMessage.length; j++) { //for each message individually (which ever message is currently in the loop)
