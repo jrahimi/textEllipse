@@ -1,6 +1,5 @@
 //Conversations
 
-//1 - Never met (Adena & Clayton)
 var leftConversation1 = ["Miss *** that smile.",
   "North Hollywood, and you?",
   "That's not crazy far! Where are you moving to?",
@@ -25,7 +24,6 @@ var rightConversation1 = ["Hehe. Where do you live?",
   "   "
 ]; //Girl
 
-//2 - Never met (Adena & Garett)
 var leftConversation2 = ["Where are you from?",
   "I can't wait. I'm from LA too! Where in LA do you live?",
   "I was in Agoura earlier today! But I live in Encino. Hopefully moving soon though.",
@@ -50,7 +48,6 @@ var rightConversation2 = ["I'm from LA, what about you?",
   "   "
 ]; //Boy
 
-//3 - Never met (Adena & Pierce)
 var leftConversation3 = ["Hey *** you're a Gaucho! How's your night going?",
   "Yep! I live in Mar Vista how about you?",
   "What do you do for work?",
@@ -75,7 +72,6 @@ var rightConversation3 = ["Yes you also went to UCSB!! Where do you live?",
   "   "
 ]; //Girl
 
-//4 - Never met (Justin & Stormi)
 var leftConversation4 = ["Hello there, how are you doing? I love your name, bad ass haha",
   "I'm doing fantastic, out with some friends on a small road trip vacation. I genuinely think I had the greatest weekend of this year so far haha. Sad to leave tomorrow but ready for my own bed haha. How was your weekend?",
   "That's awesome! We both had good weekend. Gotta keep the trend going for this month haha. And good morning to you :) I had to get up really early so we could drive back. And it's my shift at the wheel",
@@ -100,7 +96,6 @@ var rightConversation4 = ["Haha thank you! And I'm good. How are you?",
   "   "
 ]; //Girl
 
-//5 - Never met (Justin & Taylor)
 var leftConversation5 = ["Hey ***, how are you doing?",
   "I'm good just out with some friends. Where are you from?",
   "I'm from Tri Valley, across the bridge. Moved to LA though haha, guess we kinda swapped",
@@ -125,7 +120,6 @@ var rightConversation5 = ["Pretty good. How are you doing?",
   "  "
 ]; //Girl
 
-//6 - Never met (Justin & Jayda)
 var leftConversation6 = ["Hey there, how you doing?",
   "Headed out tonight. What are you up to?",
   "What are you and your friends about to do?",
@@ -150,7 +144,6 @@ var rightConversation6 = ["good haha I've been busy af. I'm in Colorado on vacat
   "  "
 ]; //Girl
 
-//7 - Never met (Justin & Ariella)
 var leftConversation7 = ["Hey what's up",
   "Always been a Ravenclaw haha. Just out right now with a friend right now. How was your weekend?",
   "  ",
@@ -175,7 +168,6 @@ var rightConversation7 = ["I got sorted into ravrnclaw, but I've always thought 
   "  "
 ]; //Girl
 
-//8 - Met once (Me & christopher) - Shortened
 var leftConversation8 = ["I'm out in California next month, any advice?",
   "We've got a place booked in West Hollywood and I've got a session out in Oakland for a couple nights",
   "Amazing! I'll definitely check those out. Thank you :) So what made you give up sunny California for gloomy London?",
@@ -200,7 +192,6 @@ var rightConversation8 = ["Hmm. What part of California will you be in?",
   "  "
 ]; //Girl
 
-//9 - Met twice and kept in touch (Me & Toby) - shortened by a lot - can title it with "Well then, a walk on the beach." - what happened that night 
 var leftConversation9 = ["Mademoiselle. How are you this fine Saturday?",
   "Similarly, taking the pup for a walk. I've just returned from South America, so it's the simple things in life...What kind of dog do you have?",
   "Just traveling around the continent for the past 5 months. Was pretty great but feels weird being back. Golden retriever, of course :)",
@@ -257,8 +248,8 @@ function setup() {
   append(conversations, new Conversation("Boy Band", leftConversation1, rightConversation1, maleVoice, femaleVoice)); //Conversation 1
   append(conversations, new Conversation("'We are twins!'", leftConversation2, rightConversation2, femaleVoice, maleVoice)); //Conversation 2
   append(conversations, new Conversation("Gauchos", leftConversation3, rightConversation3, maleVoice, femaleVoice)); //Conversation 3
-  append(conversations, new Conversation("Swapped", leftConversation4, rightConversation4, maleVoice, femaleVoice)); //Conversation 4
-  append(conversations, new Conversation("They broke up", leftConversation5, rightConversation5, maleVoice, femaleVoice)); //Conversation 5
+  append(conversations, new Conversation("Good Weekends", leftConversation4, rightConversation4, maleVoice, femaleVoice)); //Conversation 4
+  append(conversations, new Conversation("Swapped", leftConversation5, rightConversation5, maleVoice, femaleVoice)); //Conversation 5
   append(conversations, new Conversation("Maybe another night?", leftConversation6, rightConversation6, maleVoice, femaleVoice)); //Conversation 6
   append(conversations, new Conversation("Ravenclaw vs. Gryffendor", leftConversation7, rightConversation7, maleVoice, femaleVoice)); //Conversation 7
   append(conversations, new Conversation("Neighbors?", leftConversation8, rightConversation8, maleVoice, femaleVoice)); //Conversation 8
@@ -345,8 +336,9 @@ function Conversation(title, leftMessages, rightMessages, leftVoice, rightVoice)
   this.staticMessage = 0
   this.staticLeftPosition = createVector(width / 3, height / 3);
   this.staticRightPosition = createVector((width / 3) * 2, height / 2);
-
-  for (var i = 0; i < this.leftMessages.length; i++) { //Assigns random positions and velocities to all messages 
+  
+  //Assigns random positions and velocities to all messages 
+  for (var i = 0; i < this.leftMessages.length; i++) { //we use this.leftMessages because both arrays are the same length
     this.leftPositions[i] = createVector(random(width / 2), random(height / 2)); //https://p5js.org/reference/#/p5.Vector
     this.leftVelocities[i] = createVector(random(1, 5), random(1, 5)); //https://p5js.org/reference/#/p5/random
     this.rightPositions[i] = createVector(random(width / 2), random(height / 2)); //https://p5js.org/reference/#/p5.Vector
@@ -364,12 +356,12 @@ function Conversation(title, leftMessages, rightMessages, leftVoice, rightVoice)
 
   this.nextInConversation = function() {
     this.staticMessage++; //increment
-    if (this.staticMessage >= this.leftMessages.length) { //we use this.leftMessages because both arrays are the same length
+    if (this.staticMessage >= this.leftMessages.length) { 
       this.staticMessage = 0; //if it's too long, reset to 0
     }
   }
 
-  this.previousInConversation = function() { //this is never called now, you can't go back in time!
+  this.previousInConversation = function() { 
     this.staticMessage--; //decrement
     if (this.staticMessage < 0) {
       this.staticMessage = this.leftMessages.length - 1; //-1 because we number from 0 AND we use this.leftMessages because both arrays are the same length
