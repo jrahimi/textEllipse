@@ -245,6 +245,7 @@ femaleVoice.onEnd = false; //Speech end
 
 function setup() {
   createCanvas(800, 800); //This will need to be fullScreen
+  frameRate(120);
 
   //Text 
   textFont("Verdana");
