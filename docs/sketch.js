@@ -316,8 +316,8 @@ function Conversation(title, leftMessages, rightMessages, leftVoice, rightVoice)
 
   //Left and Right Static Messages 
   this.staticMessage = 0;
-  this.staticLeftPosition = createVector(width / 3, height / 3);
-  this.staticRightPosition = createVector((width * (2 / 3)), height / 2);
+  this.staticLeftPosition = createVector(random(0, (width / 3) - 400), random(100, height / 2 - 200));
+  this.staticRightPosition = createVector(random(width / 2, width * (2 / 3) - 200), random((100, height / 3) - 200));
 
   //Images of Messages 
   this.imagesOfLeftMessages = new Array(this.leftMessages.length);
@@ -351,7 +351,7 @@ function Conversation(title, leftMessages, rightMessages, leftVoice, rightVoice)
     this.imagesOfLeftMessages[i] = createGraphics(this.radiusOfLeftMessage * 4, this.radiusOfLeftMessage * 4); //Radius is multiplied to find the width and height of the image
     this.imagesOfLeftMessages[i].pixelDensity(1); //Scales graphic to the right size since createGraphic() scales the image
     this.imagesOfLeftMessages[i].translate(this.imagesOfLeftMessages[i].width / 2, this.imagesOfLeftMessages[i].height / 2); //Translates image to fit within the graphic at the center
-
+    
     //Create Right Graphics
     this.imagesOfRightMessages[i] = createGraphics(this.radiusOfRightMessage * 4, this.radiusOfRightMessage * 4); //Radius is multiplied to find the width and height of the image
     this.imagesOfRightMessages[i].pixelDensity(1); //Scales graphic to the right size since createGraphic() scales the image
@@ -383,7 +383,7 @@ function Conversation(title, leftMessages, rightMessages, leftVoice, rightVoice)
       this.imagesOfLeftMessages[i].translate(this.radiusOfLeftMessage * cos(this.theta), this.radiusOfLeftMessage * sin(this.theta));
       this.imagesOfLeftMessages[i].rotate(this.theta + HALF_PI); //Rotates each letter accordingly around ellipse to create a more fluid circle 
       // if (!this.isStatic) { //If not the static message the colour of the message has an opacity
-        this.imagesOfLeftMessages[i].fill(red(this.leftColour), green(this.leftColour), blue(this.leftColour), 50); //Gives each ellipse the color assigned during setup and initialization of the class 
+        this.imagesOfLeftMessages[i].fill(red(this.leftColour), green(this.leftColour), blue(this.leftColour), 100); //Gives each ellipse the color assigned during setup and initialization of the class 
       // } else { //If it is the static message, the colour of the message does not have an opacity
         // this.imagesOfLeftMessages[i].fill(red(this.leftColour), green(this.leftColour), blue(this.leftColour)); //Static colour
       // }
@@ -405,7 +405,7 @@ function Conversation(title, leftMessages, rightMessages, leftVoice, rightVoice)
       this.imagesOfRightMessages[i].translate(this.radiusOfRightMessage * cos(this.theta), this.radiusOfRightMessage * sin(this.theta));
       this.imagesOfRightMessages[i].rotate(this.theta + HALF_PI); //Rotates each letter accordingly around ellipse to create a more fluid circle 
       // if (!this.isStatic) { //If not the static message the colour of the message has an opacity
-        this.imagesOfRightMessages[i].fill(red(this.rightColour), green(this.rightColour), blue(this.rightColour), 50); //Gives each ellipse the color assigned during setup and initialization of the class 
+        this.imagesOfRightMessages[i].fill(red(this.rightColour), green(this.rightColour), blue(this.rightColour), 100); //Gives each ellipse the color assigned during setup and initialization of the class 
       // } else { //If it is the static message, the colour of the message does not have an opacity
         // this.imagesOfRightMessages[i].fill(red(this.rightColour), green(this.rightColour), blue(this.rightColour)); //Static colour
       // }
@@ -447,13 +447,13 @@ function Conversation(title, leftMessages, rightMessages, leftVoice, rightVoice)
         this.leftPositions[i].add(this.leftVelocities[i]); //Add the velocity to the position to move it correctly on this frame
         this.rightPositions[i].add(this.rightVelocities[i]); //Add the velocity to the position to move it correctly on this frame
 
-        if (this.leftPositions[i].x > windowWidth || this.leftPositions[i].x < 0 || this.rightPositions[i].x > windowWidth || this.rightPositions[i].x < 0) {
+        if (this.leftPositions[i].x > width || this.leftPositions[i].x < -500|| this.rightPositions[i].x > width || this.rightPositions[i].x < -500) {
           //If the x position is to the left of the screen or to the right, flip the velocity so that it bounces back into view
           this.leftVelocities[i].x *= -1;
           this.rightVelocities[i].x *= -1;
         }
 
-        if (this.leftPositions[i].y > width || this.leftPositions[i].y < 0 || this.rightPositions[i].y > height || this.rightPositions[i].y < 0) {
+        if (this.leftPositions[i].y > height || this.leftPositions[i].y < 0 || this.rightPositions[i].y > height || this.rightPositions[i].y < 0) {
           //If the y position is to the top of the screen or to the bottom, flip the velocity so that it bounces back into view
           this.leftVelocities[i].y *= -1;
           this.rightVelocities[i].y *= -1;
@@ -474,7 +474,7 @@ function Conversation(title, leftMessages, rightMessages, leftVoice, rightVoice)
   this.draw = function() {
     //Conversation Title
     fill((red(this.leftColour) + red(this.rightColour)) / 2, (green(this.leftColour) + green(this.rightColour)) / 2, (blue(this.leftColour) + blue(this.rightColour)) / 2); //Conversation title colour
-    text(this.title, width / 2, 100);
+    text(this.title, width / 2, height / 2);
 
     //Draw Message Graphic
     for (var i = 0; i < this.leftMessages.length; i++) { //For all the messages in an array (We use this.leftMessages because all arrays are the same length)  
