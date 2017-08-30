@@ -1,5 +1,4 @@
 //Conversations
-
 var leftConversation1 = ["Miss *** that smile.",
   "North Hollywood, and you?",
   "That's not crazy far! Where are you moving to?",
@@ -36,14 +35,14 @@ var leftConversation2 = ["Where are you from?",
   "   "
 ]; //Girl
 
-var rightConversation2 = ["I'm from LA, what about you?",
-  "The 3 day weekend. I'm from LA, what about you?",
+var rightConversation2 = ["The 3 day weekend. I'm from LA, what about you?",
   "We are twins! I live in Brentwood, what about you? You're in Agoura?",
   "Oh I work in Woodland Hills and I'm from Calabasas so I know about the valley life",
   "No my parents live in Hidden Hills, I live in Brentwood with my buddies. You just move back from college?",
   "I did go to CHS, did you?",
   "Ahh yes cause you lived in Encino. Do you have friends that live out the Westside by me?",
   "Movin on out. What are you doing tonight?",
+  "   ",
   "   ",
   "   "
 ]; //Boy
@@ -74,7 +73,7 @@ var rightConversation3 = ["Yes you also went to UCSB!! Where do you live?",
 
 var leftConversation4 = ["Hello there, how are you doing? I love your name, bad ass haha",
   "I'm doing fantastic, out with some friends on a small road trip vacation. I genuinely think I had the greatest weekend of this year so far haha. Sad to leave tomorrow but ready for my own bed haha. How was your weekend?",
-  "That's awesome! We both had good weekend. Gotta keep the trend going for this month haha. And good morning to you :) I had to get up really early so we could drive back. And it's my shift at the wheel",
+  "That's awesome! We both had good weekends. Gotta keep the trend going for this month haha. And good morning to you :) I had to get up really early so we could drive back. And it's my shift at the wheel",
   "Dont worry! I survived haha. Oh man hopefully you can have some fun before you sleep :)",
   "Oh no!! Not much time for sleep hahah, sleep is definitely still a win though",
   "No passed out hard after that drive haha",
@@ -216,6 +215,7 @@ var rightConversation9 = ["Hello (: Well, thank you. Just relaxing with my dog. 
   "  "
 ]; //Girl
 
+//Conversations Array and Current Conversation Index
 var conversations = new Array(); //Array of conversation objects
 var currentConversation = 0; //Current conversation index 
 
@@ -225,26 +225,23 @@ var value = 0;
 //Speech
 var speaking = false;
 var leftSpeaking = false;
+
 //Male Conversation Speech
 var maleVoice = new p5.Speech('Google UK English Male'); //New P5.Speech object
-maleVoice.onStart = true; //Speech start
-maleVoice.onEnd = false; //Speech end
+
 //Female Conversation Speech
 var femaleVoice = new p5.Speech('Google UK English Female'); //New P5.Speech object
-femaleVoice.onStart = true; //Speech start
-femaleVoice.onEnd = false; //Speech end
 
 function setup() {
-  createCanvas(800, 800); //This will need to be fullScreen
-  frameRate(120);
+  createCanvas(windowWidth, windowHeight); //This will need to be fullScreen
 
-  //Text 
+  //Text (for conversation title)  
   textFont("Verdana");
   textSize(15);
   textAlign(CENTER);
   smooth();
 
-  //Create a new Conversation and send it conversations and conversation colors
+  //Create a new Conversation and send it conversations, conversation colors, and voices
   append(conversations, new Conversation("Boy Band", leftConversation1, rightConversation1, maleVoice, femaleVoice)); //Conversation 1
   append(conversations, new Conversation("'We are twins!'", leftConversation2, rightConversation2, femaleVoice, maleVoice)); //Conversation 2
   append(conversations, new Conversation("Gauchos", leftConversation3, rightConversation3, maleVoice, femaleVoice)); //Conversation 3
@@ -254,7 +251,7 @@ function setup() {
   append(conversations, new Conversation("Ravenclaw vs. Gryffendor", leftConversation7, rightConversation7, maleVoice, femaleVoice)); //Conversation 7
   append(conversations, new Conversation("Neighbors?", leftConversation8, rightConversation8, maleVoice, femaleVoice)); //Conversation 8
   append(conversations, new Conversation("'Well then, a walk on the beach'", leftConversation9, rightConversation9, maleVoice, femaleVoice)); //Conversation 9
-  
+
   //Enable Gestures
   Gestures();
 }
@@ -276,33 +273,17 @@ function Gestures() {
 
   var hammer = new Hammer(document.body, options); //Document.body registers gestures anywhere on the page
 
-  // hammer.on("swipe", function(event) { //Swipe
-  //   if (event.direction == 4 || value) { //Right swipe
-  //     conversations[currentConversation].nextInConversation();
-
-  //   } else if (event.direction == 2 || value) { //Left swipe
-  //     currentConversation++
-
-  //     if (currentConversation >= conversations.length) {
-  //       currentConversation = 0;
-  //     }
-  //   }
-  //   // console.log(event);
-  // });
-
   hammer.on("doubletap", function(event) { //Double tap 
     conversations[currentConversation].saySomething(); //Say current conversation 
   });
 }
 
-function keyPressed() {
+function keyPressed() { //Using the program BetterTouchTool, swipes are converted into keyPressed to create the correct swipping animation with an Apple Magic Touchpad
   if (keyCode === RIGHT_ARROW) { //Right Swipe
-    // value = 4;
     conversations[currentConversation].nextInConversation(); //Next pair of ellipses fill static position
   }
 
   if (keyCode === LEFT_ARROW) { //Left Swipe
-    // value = 2;
     currentConversation++ //New conversation 
     if (currentConversation >= conversations.length) { //Loops back through conversations when the program has reached the last conversation
       currentConversation = 0;
@@ -311,20 +292,21 @@ function keyPressed() {
 }
 
 function Conversation(title, leftMessages, rightMessages, leftVoice, rightVoice) { //https://github.com/processing/p5.js/wiki/JavaScript-basics#using-parameters for how to make classes and constructors
-  this.title = title; //Conversation
-  this.leftMessages = leftMessages;
-  this.rightMessages = rightMessages;
-  this.leftVoice = leftVoice;
-  this.rightVoice = rightVoice;
+  this.title = title; //Conversation Title
+  this.leftMessages = leftMessages; //Left Messages
+  this.rightMessages = rightMessages; //Right Messages
+  this.leftVoice = leftVoice; //Left Voice
+  this.rightVoice = rightVoice; //Right Voice
 
+  //Check to make sure all the conversations have the same amount of messages in the array (10)
   if (this.leftMessages.length != this.rightMessages.length) {
     //LEFT AND RIGHT MESSAGES MUST BE THE SAME LENGTH, SO ERROR MESSAGE
     console.log("BIG TROUBLE! LEFT AND RIGHT MESSAGES MUST BE THE SAME LENGTH")
   }
 
   //Text Colour
-  var leftColour = color(random(255), random(255), random(255));
-  var rightColour = color(random(255), random(255), random(255));
+  this.leftColour = color(random(255), random(255), random(255)); //Left colour is random to make each ellipise gender ambiguous on the start 
+  this.rightColour = color(random(255), random(255), random(255)); //Right colour is random to make each ellipise gender ambiguous on the start
 
   //Positions and Velocities
   this.leftPositions = new Array(this.leftMessages.length);
@@ -333,61 +315,152 @@ function Conversation(title, leftMessages, rightMessages, leftVoice, rightVoice)
   this.rightVelocities = new Array(this.rightMessages.length);
 
   //Left and Right Static Messages 
-  this.staticMessage = 0
+  this.staticMessage = 0;
   this.staticLeftPosition = createVector(width / 3, height / 3);
-  this.staticRightPosition = createVector((width / 3) * 2, height / 2);
-  
-  //Assigns random positions and velocities to all messages 
-  for (var i = 0; i < this.leftMessages.length; i++) { //we use this.leftMessages because both arrays are the same length
-    this.leftPositions[i] = createVector(random(width / 2), random(height / 2)); //https://p5js.org/reference/#/p5.Vector
-    this.leftVelocities[i] = createVector(random(1, 5), random(1, 5)); //https://p5js.org/reference/#/p5/random
-    this.rightPositions[i] = createVector(random(width / 2), random(height / 2)); //https://p5js.org/reference/#/p5.Vector
-    this.rightVelocities[i] = createVector(random(1, 5), random(1, 5)); //https://p5js.org/reference/#/p5/random    
+  this.staticRightPosition = createVector((width * (2 / 3)), height / 2);
+
+  //Images of Messages 
+  this.imagesOfLeftMessages = new Array(this.leftMessages.length);
+  this.imagesOfRightMessages = new Array(this.leftMessages.length);
+
+  for (var i = 0; i < this.leftMessages.length; i++) { //For all the messages in the array (We use this.leftMessages because all arrays are the same length)  
+    //Assigns Random Positions and Velocities to All Left Messages
+    this.leftPositions[i] = createVector(random(width / 2), random(height / 2));
+    this.leftVelocities[i] = createVector(random(1, 5), random(1, 5));
+
+    //Assigns Random Positions and Velocities to All Right Messages
+    this.rightPositions[i] = createVector(random(width / 2), random(height / 2));
+    this.rightVelocities[i] = createVector(random(1, 5), random(1, 5));
+
+    //Get the Current Message
+    this.currentLeftMessage = this.leftMessages[i];
+    this.currentRightMessage = this.rightMessages[i];
+
+    this.arcLength = 0; //Keeps track of our position along the curve
+    this.isStatic = (this.staticMessage == i); //Get the current static message
+
+    //Get the Width (Length) of Each Message
+    this.widthOfLeftMessage = textWidth(this.currentLeftMessage);
+    this.widthOfRightMessage = textWidth(this.currentRightMessage);
+
+    //Radius of Each Message
+    this.radiusOfLeftMessage = (this.widthOfLeftMessage + 5) / (TWO_PI); //Equation for radius of left message, 5 is added for a bit of padding
+    this.radiusOfRightMessage = (this.widthOfRightMessage + 5) / (TWO_PI); //Equation for radius of right message, 5 is added for a bit of padding
+
+    //Create Left Graphics
+    this.imagesOfLeftMessages[i] = createGraphics(this.radiusOfLeftMessage * 4, this.radiusOfLeftMessage * 4); //Radius is multiplied to find the width and height of the image
+    this.imagesOfLeftMessages[i].pixelDensity(1); //Scales graphic to the right size since createGraphic() scales the image
+    this.imagesOfLeftMessages[i].translate(this.imagesOfLeftMessages[i].width / 2, this.imagesOfLeftMessages[i].height / 2); //Translates image to fit within the graphic at the center
+
+    //Create Right Graphics
+    this.imagesOfRightMessages[i] = createGraphics(this.radiusOfRightMessage * 4, this.radiusOfRightMessage * 4); //Radius is multiplied to find the width and height of the image
+    this.imagesOfRightMessages[i].pixelDensity(1); //Scales graphic to the right size since createGraphic() scales the image
+    this.imagesOfRightMessages[i].translate(this.imagesOfRightMessages[i].width / 2, this.imagesOfRightMessages[i].height / 2); //Translates image to fit within the graphic at the center
+
+    //Conversation Graphic Background
+    this.imagesOfLeftMessages[i].background(255, 255, 255, 0); //White background with an alpha to make the graphic's background transparent
+    this.imagesOfRightMessages[i].background(255, 255, 255, 0); //White background with an alpha to make the graphic's background transparent
+
+    //Left Conversation Text Attributes
+    this.imagesOfLeftMessages[i].textFont('Verdana', 15); //Left message font type and size
+    this.imagesOfLeftMessages[i].textAlign(CENTER); //Left message text align center
+    this.imagesOfLeftMessages[i].smooth(); //Left message text smooth
+
+    //Right conversation Text Attributes
+    this.imagesOfRightMessages[i].textFont('Verdana', 15); //Right message font type and size
+    this.imagesOfRightMessages[i].textAlign(CENTER); //Right message text align center
+    this.imagesOfRightMessages[i].smooth(); //Right message text smooth
+
+    //Current Left Message - Refrence: https://processing.org/tutorials/text/
+    for (var j = 0; j < this.currentLeftMessage.length; j++) { //For each message individually (which ever message is currently in the loop)
+      this.currentCharacter = this.currentLeftMessage.charAt(j); //Current character of the current message (which ever message is currently in the loop)
+      this.characterWidth = textWidth(this.currentCharacter); //Gets the width (length) of each character
+
+      this.arcLength += this.characterWidth / 2; //Move along the arc, half the width of the character at a time
+      this.theta = PI + this.arcLength / this.radiusOfLeftMessage; //Theta (angle of change) is equal to PI (offset) + arclength
+
+      this.imagesOfLeftMessages[i].push();
+      this.imagesOfLeftMessages[i].translate(this.radiusOfLeftMessage * cos(this.theta), this.radiusOfLeftMessage * sin(this.theta));
+      this.imagesOfLeftMessages[i].rotate(this.theta + HALF_PI); //Rotates each letter accordingly around ellipse to create a more fluid circle 
+      // if (!this.isStatic) { //If not the static message the colour of the message has an opacity
+        this.imagesOfLeftMessages[i].fill(red(this.leftColour), green(this.leftColour), blue(this.leftColour), 50); //Gives each ellipse the color assigned during setup and initialization of the class 
+      // } else { //If it is the static message, the colour of the message does not have an opacity
+        // this.imagesOfLeftMessages[i].fill(red(this.leftColour), green(this.leftColour), blue(this.leftColour)); //Static colour
+      // }
+      this.imagesOfLeftMessages[i].text(this.currentCharacter, 0, 0);
+      this.imagesOfLeftMessages[i].pop();
+
+      this.arcLength += this.characterWidth / 2; //Move along the arc, half the width of the character at a time
+    }
+
+    //Current Right Message - Refrence: https://processing.org/tutorials/text/ 
+    for (var k = 0; k < this.currentRightMessage.length; k++) { //For each message individually (which ever message is currently in the loop)
+      this.currentCharacter = this.currentRightMessage.charAt(k); //Current character of the current message (which ever message is currently in the loop)
+      this.characterWidth = textWidth(this.currentCharacter); //Gets the width (length) of each character
+
+      this.arcLength += this.characterWidth / 2; //Move along the arc, half the width of the character at a time
+      this.theta = PI + this.arcLength / this.radiusOfRightMessage; //Theta (angle of change) is equal to PI (offset) + arclength
+
+      this.imagesOfRightMessages[i].push();
+      this.imagesOfRightMessages[i].translate(this.radiusOfRightMessage * cos(this.theta), this.radiusOfRightMessage * sin(this.theta));
+      this.imagesOfRightMessages[i].rotate(this.theta + HALF_PI); //Rotates each letter accordingly around ellipse to create a more fluid circle 
+      // if (!this.isStatic) { //If not the static message the colour of the message has an opacity
+        this.imagesOfRightMessages[i].fill(red(this.rightColour), green(this.rightColour), blue(this.rightColour), 50); //Gives each ellipse the color assigned during setup and initialization of the class 
+      // } else { //If it is the static message, the colour of the message does not have an opacity
+        // this.imagesOfRightMessages[i].fill(red(this.rightColour), green(this.rightColour), blue(this.rightColour)); //Static colour
+      // }
+      this.imagesOfRightMessages[i].text(this.currentCharacter, 0, 0);
+      this.imagesOfRightMessages[i].pop();
+
+      this.arcLength += this.characterWidth / 2; //Move along the arc, half the width of the character at a time
+    }
   }
 
+  //Speech
   this.saySomething = function() {
-    if (!speaking) {
+    if (!speaking) { //If nothing is being said, say left message
       this.leftVoice.speak(this.leftMessages[this.staticMessage]);
     }
-    if (!leftSpeaking) {
+    if (!leftSpeaking) { //If left message isn't being said, say right message 
       this.rightVoice.speak(this.rightMessages[this.staticMessage])
     }
   }
 
-  this.nextInConversation = function() {
-    this.staticMessage++; //increment
-    if (this.staticMessage >= this.leftMessages.length) { 
-      this.staticMessage = 0; //if it's too long, reset to 0
+  this.nextInConversation = function() { //When right swipe, next message in conversation
+    this.staticMessage++; //Increment
+    if (this.staticMessage >= this.leftMessages.length) {
+      this.staticMessage = 0; //If it's too long, reset to 0
     }
   }
 
-  this.previousInConversation = function() { 
-    this.staticMessage--; //decrement
+  this.previousInConversation = function() { //When left swipe, filter in new conversation
+    this.staticMessage--; //Decrement
     if (this.staticMessage < 0) {
       this.staticMessage = this.leftMessages.length - 1; //-1 because we number from 0 AND we use this.leftMessages because both arrays are the same length
     }
   }
 
-  this.update = function() { //adds the positions and the velocities together to get animation
-    for (var i = 0; i < this.leftMessages.length; i++) { //for all the messages
-      if (i != this.staticMessage) {
-        this.leftPositions[i].add(this.leftVelocities[i]); //add the velocity to the position to move it correctly on this frame
-        this.rightPositions[i].add(this.rightVelocities[i]); //add the velocity to the position to move it correctly on this frame
+  //Animation
+  this.update = function() { //Adds the positions and the velocities together to get animation for all messages
+    for (var i = 0; i < this.leftMessages.length; i++) { //We use this.leftMessages because both arrays are the same length  
+      if (i != this.staticMessage) { //If the message is not static we need to animate it around the screen
+        this.leftPositions[i].add(this.leftVelocities[i]); //Add the velocity to the position to move it correctly on this frame
+        this.rightPositions[i].add(this.rightVelocities[i]); //Add the velocity to the position to move it correctly on this frame
 
-        if (this.leftPositions[i].x > width || this.leftPositions[i].x < 0 || this.rightPositions[i].x > width || this.rightPositions[i].x < 0) {
-          //if the x position is to the left of the screen or to the right, flip the velocity so that it bounces back into view
+        if (this.leftPositions[i].x > windowWidth || this.leftPositions[i].x < 0 || this.rightPositions[i].x > windowWidth || this.rightPositions[i].x < 0) {
+          //If the x position is to the left of the screen or to the right, flip the velocity so that it bounces back into view
           this.leftVelocities[i].x *= -1;
           this.rightVelocities[i].x *= -1;
         }
 
-        if (this.leftPositions[i].y > height || this.leftPositions[i].y < 0 || this.rightPositions[i].y > height || this.rightPositions[i].y < 0) {
-          //if the y position is to the top of the screen or to the bottom, flip the velocity so that it bounces back into view
+        if (this.leftPositions[i].y > width || this.leftPositions[i].y < 0 || this.rightPositions[i].y > height || this.rightPositions[i].y < 0) {
+          //If the y position is to the top of the screen or to the bottom, flip the velocity so that it bounces back into view
           this.leftVelocities[i].y *= -1;
           this.rightVelocities[i].y *= -1;
         }
 
       } else {
-        //it is the static message, position in the middle of the screen
+        //It is the static message, position in the middle of the screen
         this.leftPositions[i].x = this.staticLeftPosition.x;
         this.leftPositions[i].y = this.staticLeftPosition.y;
 
@@ -397,51 +470,19 @@ function Conversation(title, leftMessages, rightMessages, leftVoice, rightVoice)
     }
   }
 
+  //Draw
   this.draw = function() {
-    fill((red(leftColour) + red(rightColour)) / 2, (green(leftColour) + green(rightColour)) / 2, (blue(leftColour) + blue(rightColour)) / 2)
+    //Conversation Title
+    fill((red(this.leftColour) + red(this.rightColour)) / 2, (green(this.leftColour) + green(this.rightColour)) / 2, (blue(this.leftColour) + blue(this.rightColour)) / 2); //Conversation title colour
     text(this.title, width / 2, 100);
 
-    for (var i = 0; i < this.leftMessages.length; i++) { //for all the messages
-      var currentMessage = this.leftMessages[i]; //get the current message
-      var isStatic = (this.staticMessage == i);
-      this.drawMessage(currentMessage, this.leftPositions[i], isStatic, leftColour);
-    }
+    //Draw Message Graphic
+    for (var i = 0; i < this.leftMessages.length; i++) { //For all the messages in an array (We use this.leftMessages because all arrays are the same length)  
+      //Left Message Graphic
+      image(this.imagesOfLeftMessages[i], this.leftPositions[i].x, this.leftPositions[i].y);
 
-    for (var i = 0; i < this.rightMessages.length; i++) { //for all the messages
-      var currentMessage = this.rightMessages[i]; //get the current message
-      var isStatic = (this.staticMessage == i);
-      this.drawMessage(currentMessage, this.rightPositions[i], isStatic, rightColour);
-    }
-  }
-
-  this.drawMessage = function(aMessage, aPosition, aStatic, aColour) {
-    var currentMessage = aMessage;
-    var positionOfMessage = aPosition;
-    var isStatic = aStatic;
-    var theColour = aColour;
-    var widthOfMessage = textWidth(currentMessage); //get width (length) of each message
-    var radiusOfMessage = (widthOfMessage + 5) / (2 * PI); //equation for radius, 5 is added for a bit of padding
-    var arcLength = 0;
-
-    for (var j = 0; j < currentMessage.length; j++) { //for each message individually (which ever message is currently in the loop)
-      var currentCharacter = currentMessage.charAt(j);
-      var characterWidth = textWidth(currentCharacter); //gets the width (length) of each character
-
-      arcLength += characterWidth / 2; //move along the arc, half the width of the character at a time
-      var theta = PI + arcLength / radiusOfMessage; //theta (angle of change) is equal to PI (offset) + arclength
-
-      push();
-      translate((radiusOfMessage * cos(theta)) + positionOfMessage.x, (radiusOfMessage * sin(theta)) + positionOfMessage.y);
-      rotate(theta + PI / 2); //rotates each letter accordingly around ellipse to create a more fluid circle 
-      if (!isStatic) {
-        fill(red(theColour), green(theColour), blue(theColour), 50); //gives each ellipse the color assigned during setup and initialization of the class 
-      } else {
-        fill(red(theColour), green(theColour), blue(theColour)); //special colour
-      }
-      text(currentCharacter, 0, 0);
-      pop();
-
-      arcLength += characterWidth / 2; //move along the arc, half the width of the character at a time
+      //Right Message Graphic
+      image(this.imagesOfRightMessages[i], this.rightPositions[i].x, this.rightPositions[i].y);
     }
   }
 }
