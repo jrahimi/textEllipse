@@ -23,6 +23,7 @@
   <script src="libraries/matter.js"></script>
   <!--<script src="//d3kt63i4n3r3r8.cloudfront.net/assets/examples/hammer-1.1.1-74c3a245b2081b735186d31209e4569f.js"></script>-->
   <script src="sketch.js" type="text/javascript">
+    // Disable Web Page Navigation On Swipe
     var xPos = null;
     var yPos = null;
     window.addEventListener("touchmove", function(event) {
@@ -40,6 +41,9 @@
         }
       }
     });
+    
+    // Remove Cursor
+    document.body.style.cursor = 'none';
   </script>
 
   <style>
@@ -51,15 +55,10 @@
     canvas {
       vertical-align: top;
     }
-    /*#textCanvas{*/
-    /*  display: none;*/
-    /*}*/
   </style>
 </head>
 
 <body>
-  <!--<canvas id = 'textCanvas'></canvas>-->
-  <!--<img id = 'img'></img>-->
 </body>
 
 </html>
